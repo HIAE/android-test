@@ -1,6 +1,6 @@
 ### Seja muuuuuito bem vindx ao teste de Android do Albert Einstein!
 
-Primeiro, **VALEU** por separar seu tempo para fazer este pequeno teste.
+Primeiro, **VALEU** por separar seu tempo para fazer este pequeno teste.<br/>
 Segundo, Leia **A-TEN-TA-MEN-TE** tudo aqui para não perder nada e nos enviar um projetinho **PORRETA**!
 
 SHOW!? 
@@ -8,9 +8,9 @@ SHOW!?
 `<FunkDoInstagramDoMomento>`
 
 
-*Cumprimentos: OK*
-*Agradecimentos: OK*
-*Avisos: OK*
+ *Cumprimentos: OK* <br/>
+ *Agradecimentos: OK* <br/>
+ *Avisos: OK* <br/>
 
 *COLA NO EINSTÃO PRO DESESPERO DO...*
 
@@ -55,8 +55,9 @@ Você não tem que ser o mestre dos designers, MAS queremos devs que também sai
 - Offline first! Faça a persistência dos dados.
 - Uma tela de abertura com uma imagem do Chuck
 
+<br/>
 
-**IMPORTANTE: Faça um fork e assim que começar abra um PR com o nome "WIP - $projectName" para acompanharmos.**
+**IMPORTANTE: Faça um fork e assim que começar abra um PR com o nome "WIP - $projectName" para acompanharmos.**<br/>
 **IMPORTANTE2: Qualquer dúvida, sugestão ou problema, abra uma issue que a gente responde.**
 
 *O teste é esse. Viu? Nem doeu.*
