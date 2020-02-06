@@ -56,7 +56,8 @@ Você não tem que ser o mestre dos designers, MAS queremos devs que também sai
 - Uma tela de abertura com uma imagem do Chuck
 
 
-**IMPORTANTE: Assim que começar, nos avise e envie o link do repositório para acompanharmos.**
+**IMPORTANTE: Faça um fork e assim que começar abra um PR com o nome "WIP - $projectName" para acompanharmos.**
+**IMPORTANTE2: Qualquer dúvida, sugestão ou problema, abra uma issue que a gente responde.**
 
 *O teste é esse. Viu? Nem doeu.*
 
