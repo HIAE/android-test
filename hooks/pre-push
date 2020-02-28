@@ -1,0 +1,34 @@
+#!/bin/bash
+
+red='\033[0;31m'
+blue='\033[01;34m'
+bold=$(tput bold)
+regular=$(tput sgr0)
+
+function successSymbol {
+        echo -e "${bold}${blue}"
+        echo " ##### ALL GOOD #####"
+        echo "${regular}"
+}
+
+function errorSymbol {
+        echo -e "${bold}${red}"
+        echo "##### IT IS NOT OK #####"
+        echo "${regular}"
+}
+
+# Run lint and unit tests
+./gradlew ktlint testDebug 
+
+RESULT=$?
+
+if  [ $RESULT == 0 ] 
+then
+  successSymbol
+else
+  errorSymbol
+fi
+
+exit $RESULT
+
+

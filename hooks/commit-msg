@@ -1,0 +1,90 @@
+#!/bin/bash
+
+red='\033[0;31m'
+blue='\033[01;34m'
+bold=$(tput bold)
+regular=$(tput sgr0)
+commit_aborted="${red}${bold}COMMIT ABORTED${regular}"
+current_line=0
+
+function abort {
+        echo -e $commit_aborted
+        exit 1
+}
+
+function checkValidtype {
+        case $line in
+		"wip("*"): "* ) ;;
+                "feat("*"): "* ) ;;
+                "fix("*"): "* ) ;;
+                "docs("*"): "* ) ;;
+                "style("*"): "* ) ;;
+                "refactor("*"): "* ) ;;
+                "test("*"): "* ) ;;
+                "chore("*"): "* ) ;;
+                *)
+
+                echo "error: commit type not allowed"
+                echo "info: allowed type values:"
+                echo "${bold}feat     ${regular}(new feature for the user, not a new feature for build script)"
+                echo "${bold}fix      ${regular}(bug fix for the user, not a fix of a build script)"
+                echo "${bold}docs     ${regular}(changes to the documentation)"
+                echo "${bold}style    ${regular}(formatting, missing semi-colons, etc; no production code change)"
+                echo "${bold}refactor ${regular}(refactoring production code, eg. renaming a variable)"
+                echo "${bold}test     ${regular}(adding missing tests, refactoring tests; no production code change)"
+                echo "${bold}chore    ${regular}(updating grunt tasks etc; no production code change)"
+		echo ""
+		echo "${bold}wip      ${regular}(work in progress, do not use in production)"
+
+                abort
+        esac
+}
+
+while IFS='' read -r line || [[ -n "$line" ]]; do
+        length=${#line}
+        last_position=$(($length-1))
+        last_char=${line:$last_position:1}
+        current_line=$(($current_line+1))
+
+ if [ $current_line -eq 1 ]; then # checking subject
+        # Last character must not have punctuation
+        if [[ ! $last_char =~ [0-9a-zA-Z] ]]; then
+                echo "error: last character of the subject line must not have punctuation"
+                abort
+        fi 
+
+        # Check if the commit message contains a valid type
+        checkValidtype
+
+        # Cannot have capital letters
+        if [[ $line =~ [A-Z] ]]; then
+                echo "error: the commit message cannot have capital letters"
+                abort
+        fi
+
+        # Commit message cannot exceed 70 characters
+        if [ $length -gt 70 ]; then
+                echo "info: commit messages are limited to 70 characters"
+                echo "error: the following commit message has ${#line} characters"
+                abort
+        fi
+
+ elif  [ $current_line -eq 2 ]; then # checking empty line
+        if [ $length -ne 0 ]; then
+                echo "error: subject should be followed by a blank line"
+                abort  
+        fi
+
+ elif [ $current_line -eq 3 ]; then # checking body
+	# Commit message cannot exceed 80 characters
+        if [ $length -gt 80 ]; then
+                echo "info: body commit message are limited to 80 characters"
+                echo "error: the following body commit message has ${#line} characters"
+                abort
+	elif [ $length -eq 0 ]; then
+	   	echo "error: body should not be a blank line"
+                abort
+	fi
+ fi
+
+done < "$1"
