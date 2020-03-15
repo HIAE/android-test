@@ -1,6 +1,5 @@
 package com.example.chuckeinstein.core
 
-
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
@@ -15,7 +14,7 @@ class ChuckEinsteinApp : Application(), HasActivityInjector, HasSupportFragmentI
 
     @Inject
     lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
-
+    @Inject
     lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingActivityInjector
