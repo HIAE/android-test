@@ -1,4 +1,4 @@
-package com.example.chuckeinstein.ui.piadas
+package com.example.chuckeinstein.ui.piadas.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,7 +22,8 @@ class PiadaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val piada: String = PiadaFragmentArgs.fromBundle(it).piada
+            val piada: String = PiadaFragmentArgs
+                .fromBundle(it).piada
             adicionarDadosTela(piada)
         }
     }

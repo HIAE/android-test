@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ChuckEinstein</string>
+    <string name="ocorreu_um_erro">Ocorreu um erro!</string>
+    <string name="categorias">Categorias</string>
 </resources>

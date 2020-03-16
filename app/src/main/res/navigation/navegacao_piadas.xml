@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listaCategoriasFragment"
-        android:name="com.example.chuckeinstein.ui.piadas.ListaCategoriasFragment"
+        android:name="com.example.chuckeinstein.ui.piadas.fragments.ListaCategoriasFragment"
         android:label="lista_categorias_fragment"
         tools:layout="@layout/lista_categorias_fragment">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/piadaFragment"
-        android:name="com.example.chuckeinstein.ui.piadas.PiadaFragment"
+        android:name="com.example.chuckeinstein.ui.piadas.fragments.PiadaFragment"
         android:label="fragment_piada"
         tools:layout="@layout/fragment_piada">
         <argument

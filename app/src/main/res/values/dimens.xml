@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margem_vertical">24dp</dimen>
+    <dimen name="titulo">22sp</dimen>
+    <dimen name="corpo">16sp</dimen>
+    <dimen name="margem_categorias">16dp</dimen>
+</resources>

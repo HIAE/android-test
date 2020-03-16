@@ -1,7 +1,7 @@
 package com.example.chuckeinstein.di
 
-import com.example.chuckeinstein.ChuckEinsteinActivity
-import com.example.chuckeinstein.ui.piadas.ListaCategoriasFragment
+import com.example.chuckeinstein.ui.ChuckEinsteinActivity
+import com.example.chuckeinstein.ui.piadas.fragments.ListaCategoriasFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

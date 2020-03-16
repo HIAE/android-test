@@ -1,7 +1,8 @@
-package com.example.chuckeinstein
+package com.example.chuckeinstein.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.chuckeinstein.R
 
 class ChuckEinsteinActivity : AppCompatActivity() {
 

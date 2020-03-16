@@ -1,4 +1,4 @@
-package com.example.chuckeinstein.ui.piadas
+package com.example.chuckeinstein.ui.piadas.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.example.chuckeinstein.data.repositorios.PiadasRepository
