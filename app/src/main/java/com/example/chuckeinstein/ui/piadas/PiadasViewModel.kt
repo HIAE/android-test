@@ -6,4 +6,9 @@ import javax.inject.Inject
 
 class PiadasViewModel @Inject constructor(
     private val piadasRepository: PiadasRepository
-) : ViewModel()
+) : ViewModel() {
+
+    fun pegarTextoRepositorio(): String {
+        return piadasRepository.valorRepositorio
+    }
+}

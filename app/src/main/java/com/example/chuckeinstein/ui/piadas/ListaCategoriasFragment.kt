@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.chuckeinstein.R
 import com.example.chuckeinstein.di.ViewModelFactory
 import dagger.android.support.AndroidSupportInjection
@@ -29,6 +30,12 @@ class ListaCategoriasFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(PiadasViewModel::class.java)
+        mostrarPiada(viewModel.pegarTextoRepositorio())
+    }
+
+    private fun mostrarPiada(piada: String) {
+        val acao = ListaCategoriasFragmentDirections.actionMainFragmentToPiadaFragment(piada)
+        findNavController().navigate(acao)
     }
 
 }

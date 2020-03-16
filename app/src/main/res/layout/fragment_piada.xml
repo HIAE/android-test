@@ -6,8 +6,10 @@
     tools:context=".ui.piadas.PiadaFragment">
 
     <TextView
+        android:id="@+id/tv_piada"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="FragmentPiadas" />
+        android:text=""
+        tools:text="Valor da piada" />
 
 </FrameLayout>

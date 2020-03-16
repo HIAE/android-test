@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.chuckeinstein.R
+import kotlinx.android.synthetic.main.fragment_piada.*
 
 class PiadaFragment : Fragment() {
 
@@ -16,5 +17,17 @@ class PiadaFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_piada, container, false)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            val piada: String = PiadaFragmentArgs.fromBundle(it).piada
+            adicionarDadosTela(piada)
+        }
+    }
+
+    private fun adicionarDadosTela(piada: String) {
+        tv_piada.text = piada
     }
 }

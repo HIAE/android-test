@@ -18,6 +18,10 @@
         android:id="@+id/piadaFragment"
         android:name="com.example.chuckeinstein.ui.piadas.PiadaFragment"
         android:label="fragment_piada"
-        tools:layout="@layout/fragment_piada" />
-
+        tools:layout="@layout/fragment_piada">
+        <argument
+            android:name="piada"
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
 </navigation>

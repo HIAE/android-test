@@ -13,14 +13,13 @@ buildscript {
         versao_retrofit = '2.7.2'
         versao_retrofit_moshi = '2.5.0'
         versao_okhttp3 = '4.2.1'
+        versao_nav = "2.3.0-alpha03"
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0-beta02"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versao_kotlin"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$versao_nav"
     }
 }
 
