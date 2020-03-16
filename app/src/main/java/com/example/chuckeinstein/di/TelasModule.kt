@@ -1,15 +1,15 @@
 package com.example.chuckeinstein.di
 
-import com.example.chuckeinstein.MainActivity
-import com.example.chuckeinstein.ui.main.MainFragment
+import com.example.chuckeinstein.ChuckEinsteinActivity
+import com.example.chuckeinstein.ui.piadas.ListaCategoriasFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class TelasModule {
     @ContributesAndroidInjector
-    abstract fun injetarMainActivity(): MainActivity
+    abstract fun injetarAtividadeChuckEinstein(): ChuckEinsteinActivity
 
     @ContributesAndroidInjector
-    abstract fun injetarMainFragment(): MainFragment
+    abstract fun injetarFragmentoListaCategorias(): ListaCategoriasFragment
 }

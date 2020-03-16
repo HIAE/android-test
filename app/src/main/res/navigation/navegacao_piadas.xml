@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacao_piadas"
+    app:startDestination="@id/listaCategoriasFragment">
+
+    <fragment
+        android:id="@+id/listaCategoriasFragment"
+        android:name="com.example.chuckeinstein.ui.piadas.ListaCategoriasFragment"
+        android:label="lista_categorias_fragment"
+        tools:layout="@layout/lista_categorias_fragment">
+        <action
+            android:id="@+id/action_mainFragment_to_piadaFragment"
+            app:destination="@id/piadaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/piadaFragment"
+        android:name="com.example.chuckeinstein.ui.piadas.PiadaFragment"
+        android:label="fragment_piada"
+        tools:layout="@layout/fragment_piada" />
+
+</navigation>
