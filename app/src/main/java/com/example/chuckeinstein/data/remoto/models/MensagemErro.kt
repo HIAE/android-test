@@ -1,4 +1,4 @@
-package com.example.chuckeinstein.data.remoto
+package com.example.chuckeinstein.data.remoto.models
 
 import com.example.chuckeinstein.core.Constantes
 import com.example.chuckeinstein.utils.ViewType

@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chuckeinstein.R
-import com.example.chuckeinstein.data.remoto.Categorias
-import com.example.chuckeinstein.data.remoto.MensagemErro
+import com.example.chuckeinstein.data.remoto.models.ChuckNorrisCategorias
+import com.example.chuckeinstein.data.remoto.models.MensagemErro
 import com.example.chuckeinstein.di.ViewModelFactory
 import com.example.chuckeinstein.ui.piadas.adapters.CategoriasAdapter
 import com.example.chuckeinstein.ui.piadas.viewmodels.PiadasViewModel
@@ -42,9 +43,12 @@ class ListaCategoriasFragment : Fragment() {
     }
 
     private fun adicionarValores() {
+        viewModel.getCategorias().observe(viewLifecycleOwner, Observer {
+            adicionarListaCategorias(it)
+        })
     }
 
-    private fun adicionarListaCategorias(listaCategorias: List<Categorias>) {
+    private fun adicionarListaCategorias(listaCategorias: List<ChuckNorrisCategorias>) {
         (rv_categorias.adapter as CategoriasAdapter).adicionarCategorias(listaCategorias)
     }
 

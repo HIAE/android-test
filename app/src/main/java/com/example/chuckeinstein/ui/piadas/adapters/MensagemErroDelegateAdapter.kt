@@ -3,7 +3,7 @@ package com.example.chuckeinstein.ui.piadas.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chuckeinstein.R
-import com.example.chuckeinstein.data.remoto.MensagemErro
+import com.example.chuckeinstein.data.remoto.models.MensagemErro
 import com.example.chuckeinstein.utils.ViewType
 import com.example.chuckeinstein.utils.ViewTypeDelegateAdapter
 import com.example.chuckeinstein.utils.inflate

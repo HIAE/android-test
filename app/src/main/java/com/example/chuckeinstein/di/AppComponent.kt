@@ -8,7 +8,7 @@ import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, ViewModelModule::class, TelasModule::class])
+@Component(modules = [AndroidInjectionModule::class, ViewModelModule::class, TelasModule::class, AppModule::class])
 interface AppComponent {
 
     @Component.Builder

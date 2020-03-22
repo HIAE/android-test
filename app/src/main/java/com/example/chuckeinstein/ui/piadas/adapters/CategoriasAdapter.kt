@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chuckeinstein.core.Constantes
 import com.example.chuckeinstein.core.Constantes.LISTAS.PRIMEIRA_POSICAO
 import com.example.chuckeinstein.core.Constantes.LISTAS.UM_ITEM
-import com.example.chuckeinstein.data.remoto.Categorias
-import com.example.chuckeinstein.data.remoto.MensagemErro
+import com.example.chuckeinstein.data.remoto.models.ChuckNorrisCategorias
+import com.example.chuckeinstein.data.remoto.models.MensagemErro
 import com.example.chuckeinstein.utils.ViewType
 import com.example.chuckeinstein.utils.ViewTypeDelegateAdapter
 
@@ -58,7 +58,7 @@ class CategoriasAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return this.itens[position].getViewType()
     }
 
-    fun adicionarCategorias(categorias: List<Categorias>) {
+    fun adicionarCategorias(categorias: List<ChuckNorrisCategorias>) {
         itens.removeAt(PRIMEIRA_POSICAO)
         notifyItemRemoved(PRIMEIRA_POSICAO)
         itens.addAll(categorias)
