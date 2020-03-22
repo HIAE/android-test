@@ -25,4 +25,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Piada">
+        <item name="android:textSize">@dimen/titulo</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.piadas.fragments.PiadaFragment">
 
     <TextView
         android:id="@+id/tv_piada"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/Piada"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margem_detalhes"
         android:text=""
-        tools:text="Valor da piada" />
+        tools:text="Texto da piada" />
 
-</FrameLayout>
+</LinearLayout>

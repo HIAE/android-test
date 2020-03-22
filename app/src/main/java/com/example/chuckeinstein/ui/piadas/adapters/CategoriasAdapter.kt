@@ -12,7 +12,8 @@ import com.example.chuckeinstein.utils.ViewType
 import com.example.chuckeinstein.utils.ViewTypeDelegateAdapter
 
 
-class CategoriasAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoriasAdapter(clickCategoria: IClickCategoria) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var itens: ArrayList<ViewType> = arrayListOf()
     private var delegateAdapters = SparseArrayCompat<ViewTypeDelegateAdapter>()
@@ -28,7 +29,7 @@ class CategoriasAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         )
         delegateAdapters.put(
             Constantes.ADAPTERS.VIEW_TYPE_PIADAS_LISTA,
-            CategoriasDelegateAdapter()
+            CategoriasDelegateAdapter(clickCategoria)
         )
         delegateAdapters.put(
             Constantes.ADAPTERS.VIEW_TYPE_PIADAS_ERRO,

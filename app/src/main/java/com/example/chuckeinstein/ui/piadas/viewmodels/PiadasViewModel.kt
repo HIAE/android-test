@@ -1,8 +1,11 @@
 package com.example.chuckeinstein.ui.piadas.viewmodels
 
+
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.example.chuckeinstein.data.remoto.models.DetalhesPiada
 import com.example.chuckeinstein.data.repositorios.PiadasRepository
 import com.example.chuckeinstein.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -17,4 +20,11 @@ class PiadasViewModel @Inject constructor(
         val categorias = piadasRepository.pegarCategoriasApiChuckNorris()
         emit(categorias)
     }
+
+    fun getPiadaPorCategoria(categoria: String): LiveData<Resource<DetalhesPiada>> =
+        liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
+            emit(Resource.loading(null))
+            val piadas = piadasRepository.pegarPiadaPorCategoria(categoria)
+            emit(piadas)
+        }
 }

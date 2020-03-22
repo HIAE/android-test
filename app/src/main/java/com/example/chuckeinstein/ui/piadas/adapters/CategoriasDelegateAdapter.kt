@@ -9,7 +9,8 @@ import com.example.chuckeinstein.utils.ViewTypeDelegateAdapter
 import com.example.chuckeinstein.utils.inflate
 import kotlinx.android.synthetic.main.item_categorias.view.*
 
-class CategoriasDelegateAdapter : ViewTypeDelegateAdapter {
+class CategoriasDelegateAdapter(private val clickCategoria: IClickCategoria) :
+    ViewTypeDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return CategoriasViewHolder(parent)
     }
@@ -19,11 +20,14 @@ class CategoriasDelegateAdapter : ViewTypeDelegateAdapter {
         holder.bind(item as ChuckNorrisCategorias)
     }
 
-    class CategoriasViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    inner class CategoriasViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         parent.inflate(R.layout.item_categorias)
     ) {
-        fun bind(item: ChuckNorrisCategorias) = with(itemView) {
-            tv_titulo_categoria.text = item.piada
+        fun bind(categoria: ChuckNorrisCategorias) = with(itemView) {
+            tv_titulo_categoria.text = categoria.nome
+            super.itemView.setOnClickListener {
+                clickCategoria.clickCategoria(categoria.nome)
+            }
         }
     }
 }

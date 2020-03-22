@@ -5,28 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipetorefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/Titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margem_vertical"
-            android:gravity="center_horizontal"
-            android:text="@string/categorias"
-            android:textAlignment="center" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_categorias"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margem_vertical"
-            android:orientation="vertical"
-            tools:itemCount="10"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_categorias" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_vertical"
+                android:gravity="center_horizontal"
+                android:text="@string/categorias"
+                android:textAlignment="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_categorias"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margem_vertical"
+                android:orientation="vertical"
+                tools:itemCount="10"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_categorias" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.core.widget.NestedScrollView>
