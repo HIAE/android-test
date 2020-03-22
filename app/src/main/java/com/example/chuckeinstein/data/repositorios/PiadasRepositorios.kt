@@ -1,10 +1,8 @@
 package com.example.chuckeinstein.data.repositorios
 
-import com.example.chuckeinstein.data.remoto.conexaoapi.ApiChuckNorris
-import javax.inject.Inject
+import com.example.chuckeinstein.data.remoto.models.ChuckNorrisCategorias
+import com.example.chuckeinstein.utils.Resource
 
-class PiadasRepository @Inject constructor(
-        private val apiChuckNorris: ApiChuckNorris
-) {
-    suspend fun pegarCategoriasApiChuckNorris() = apiChuckNorris.getCategorias()
+interface PiadasRepository {
+    suspend fun pegarCategoriasApiChuckNorris(): Resource<List<ChuckNorrisCategorias>>
 }

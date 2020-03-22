@@ -15,6 +15,7 @@ import com.example.chuckeinstein.data.remoto.models.MensagemErro
 import com.example.chuckeinstein.di.ViewModelFactory
 import com.example.chuckeinstein.ui.piadas.adapters.CategoriasAdapter
 import com.example.chuckeinstein.ui.piadas.viewmodels.PiadasViewModel
+import com.example.chuckeinstein.utils.Status
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.lista_categorias_fragment.*
 import javax.inject.Inject
@@ -44,8 +45,16 @@ class ListaCategoriasFragment : Fragment() {
 
     private fun adicionarValores() {
         viewModel.getCategorias().observe(viewLifecycleOwner, Observer {
-            adicionarListaCategorias(it)
+            when (it.status) {
+                Status.SUCCESS -> it.data?.let { categorias -> adicionarListaCategorias(categorias) }
+                Status.ERROR -> it.message?.let { msgErro -> adicionarMensagemErro(msgErro) }
+                Status.LOADING -> mostrarLoading()
+            }
         })
+    }
+
+    private fun mostrarLoading() {
+        (rv_categorias.adapter as CategoriasAdapter).mostrarLoading()
     }
 
     private fun adicionarListaCategorias(listaCategorias: List<ChuckNorrisCategorias>) {

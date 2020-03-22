@@ -34,7 +34,6 @@ class CategoriasAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             Constantes.ADAPTERS.VIEW_TYPE_PIADAS_ERRO,
             MensagemErroDelegateAdapter()
         )
-        itens.add(itemCarregar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -70,5 +69,9 @@ class CategoriasAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemRemoved(PRIMEIRA_POSICAO)
         itens.add(erro)
         notifyItemRangeChanged(PRIMEIRA_POSICAO, UM_ITEM)
+    }
+
+    fun mostrarLoading() {
+        itens.add(itemCarregar)
     }
 }

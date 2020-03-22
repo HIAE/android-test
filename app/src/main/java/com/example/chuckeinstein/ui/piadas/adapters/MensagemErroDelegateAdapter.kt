@@ -23,7 +23,7 @@ class MensagemErroDelegateAdapter : ViewTypeDelegateAdapter {
     ) {
 
         fun bind(erro: MensagemErro) = with(itemView) {
-            tv_mensagem_erro.text = erro.mensagem
+            tv_mensagem_erro.text = erro.excecao.message
         }
     }
 }
