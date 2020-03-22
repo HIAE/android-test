@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chuckeinstein.R
 import com.example.chuckeinstein.data.remoto.models.ChuckNorrisCategorias
+import com.example.chuckeinstein.data.remoto.models.DetalhesPiada
 import com.example.chuckeinstein.data.remoto.models.MensagemErro
 import com.example.chuckeinstein.di.ViewModelFactory
 import com.example.chuckeinstein.ui.piadas.adapters.CategoriasAdapter
@@ -54,7 +55,7 @@ class ListaCategoriasFragment : Fragment(), IClickCategoria {
     private fun adicionarValores() {
         viewModel.getCategorias().observe(viewLifecycleOwner, Observer {
             when (it.status) {
-                Status.SUCCESS -> it.data?.let { categorias -> adicionarListaCategorias(categorias) }
+                Status.SUCCESS -> it.data?.let { categorias -> adicionarListaCategorias(categorias as? List<ChuckNorrisCategorias>) }
                 Status.ERROR -> it.message?.let { msgErro -> adicionarMensagemErro(msgErro) }
                 Status.LOADING -> mostrarLoading()
             }
@@ -65,8 +66,10 @@ class ListaCategoriasFragment : Fragment(), IClickCategoria {
         (rv_categorias.adapter as CategoriasAdapter).mostrarLoading()
     }
 
-    private fun adicionarListaCategorias(listaCategorias: List<ChuckNorrisCategorias>) {
-        (rv_categorias.adapter as CategoriasAdapter).adicionarCategorias(listaCategorias)
+    private fun adicionarListaCategorias(listaCategorias: List<ChuckNorrisCategorias>?) {
+        listaCategorias?.let {
+            (rv_categorias.adapter as CategoriasAdapter).adicionarCategorias(listaCategorias)
+        }
     }
 
     private fun adicionarMensagemErro(msgErro: MensagemErro) {
@@ -97,7 +100,7 @@ class ListaCategoriasFragment : Fragment(), IClickCategoria {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { detalhes ->
-                        mostrarPiada(detalhes.value)
+                        mostrarPiada((detalhes as DetalhesPiada).value)
                     }
                 }
                 Status.ERROR -> mostrarAlerta(getString(R.string.ocorreu_um_erro))

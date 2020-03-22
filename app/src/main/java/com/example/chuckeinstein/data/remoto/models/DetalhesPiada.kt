@@ -1,6 +1,6 @@
 package com.example.chuckeinstein.data.remoto.models
 
-class DetalhesPiada(
+data class DetalhesPiada(
     var categories: List<String>?,
     var created_at: String?,
     var icon_url: String?,
