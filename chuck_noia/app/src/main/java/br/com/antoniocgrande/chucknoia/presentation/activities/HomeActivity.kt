@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import br.com.antoniocgrande.chucknoia.R
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -16,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
      * ATRIBUTES
      *
      */
-    private val homeViewModel by lazy { HomeViewModel() }
+    private val navController by lazy { Navigation.findNavController(this, R.id.fragmentNavHost) }
 
 
     /**
@@ -31,6 +33,10 @@ class HomeActivity : AppCompatActivity() {
         setupState()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
+
 
     /**
      *
@@ -39,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupView() {
         setContentView(R.layout.activity_home)
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     private fun setupState() {
@@ -49,8 +56,6 @@ class HomeActivity : AppCompatActivity() {
                 is HomeState.ListCategories -> listCategories(state.listCategoriesResult)
             }
         })
-
-        homeViewModel.listCategories()
     }
 
 
@@ -69,6 +74,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun listCategories(listCategoriesResult: List<String>) {
         Toast.makeText(this, "$listCategoriesResult ", Toast.LENGTH_LONG).show()
+    }
+
+    companion object {
+        val homeViewModel by lazy { HomeViewModel() }
     }
 
 }

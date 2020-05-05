@@ -9,11 +9,21 @@ import br.com.antoniocgrande.chucknoia.R
 
 class JokeFragment : Fragment() {
 
+
+    /**
+     *
+     * OVERRIDE METHODS
+     *
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_joke, container, false)
+    ) = inflater.inflate(R.layout.fragment_joke, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
 }

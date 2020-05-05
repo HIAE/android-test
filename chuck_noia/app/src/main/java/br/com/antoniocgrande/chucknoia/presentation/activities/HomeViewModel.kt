@@ -20,6 +20,7 @@ class HomeViewModel : ViewModel() {
         _stateCategories.value = HomeState.ShowLoading
         _stateCategories.postValue(
             HomeState.ListCategories(
+                //TODO get from service
                 listOf(
                     "animal",
                     "career",
