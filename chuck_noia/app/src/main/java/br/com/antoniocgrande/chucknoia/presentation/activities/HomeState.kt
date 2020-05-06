@@ -13,6 +13,8 @@ sealed class HomeState {
 
     object HideLoading : HomeState()
 
-    data class ListCategories(val listCategoriesResult: List<String>) : HomeState()
+    data class ListCategories(val listCategoriesResult: List<String?>?) : HomeState()
+
+    data class Fail(val message: String?) : HomeState()
 
 }

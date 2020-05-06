@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="br.com.antoniocgrande.chucknoia.presentation.fragments.CategoriesFragment"
-        android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" >
+        android:label="@string/label_categories"
+        tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categoriesFragment_to_jokeFragment"
             app:destination="@id/jokeFragment" />
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/jokeFragment"
         android:name="br.com.antoniocgrande.chucknoia.presentation.fragments.JokeFragment"
-        android:label="fragment_joke"
+        android:label="@string/label_jokes"
         tools:layout="@layout/fragment_joke" />
 </navigation>

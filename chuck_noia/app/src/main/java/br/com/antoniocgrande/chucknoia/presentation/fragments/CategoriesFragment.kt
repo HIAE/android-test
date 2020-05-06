@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.antoniocgrande.chucknoia.R
-import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Companion.homeViewModel
+import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Companion.viewModel
 
 class CategoriesFragment : Fragment() {
 
@@ -24,7 +24,6 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupCategories()
     }
 
@@ -35,7 +34,7 @@ class CategoriesFragment : Fragment() {
      *
      */
     private fun setupCategories() {
-        homeViewModel.listCategories()
+        viewModel.listCategories()
     }
 
 }

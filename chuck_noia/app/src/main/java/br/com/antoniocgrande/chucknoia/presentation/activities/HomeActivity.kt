@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import br.com.antoniocgrande.chucknoia.R
+import br.com.antoniocgrande.chucknoia.presentation.viewmodel.ViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -49,11 +50,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupState() {
-        homeViewModel.getStateCategories().observe(this, Observer { state ->
+        viewModel.getStateCategories().observe(this, Observer { state ->
             when (state) {
                 is HomeState.ShowLoading -> showLoading()
                 is HomeState.HideLoading -> hideLoading()
                 is HomeState.ListCategories -> listCategories(state.listCategoriesResult)
+                is HomeState.Fail -> fail(state)
             }
         })
     }
@@ -72,12 +74,17 @@ class HomeActivity : AppCompatActivity() {
         linearLayoutProgressBar.visibility = View.GONE
     }
 
-    private fun listCategories(listCategoriesResult: List<String>) {
-        Toast.makeText(this, "$listCategoriesResult ", Toast.LENGTH_LONG).show()
+    private fun listCategories(listCategoriesResult: List<String?>?) {
+        Toast.makeText(this, "$listCategoriesResult", Toast.LENGTH_LONG).show()
     }
 
+    private fun fail(state: HomeState.Fail) {
+        Toast.makeText(this, "$state ", Toast.LENGTH_LONG).show()
+    }
+
+
     companion object {
-        val homeViewModel by lazy { HomeViewModel() }
+        val viewModel by lazy { ViewModel() }
     }
 
 }
