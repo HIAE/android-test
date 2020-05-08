@@ -2,7 +2,6 @@ package br.com.antoniocgrande.chucknoia.presentation.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -54,8 +53,6 @@ class HomeActivity : AppCompatActivity() {
             when (state) {
                 is HomeState.ShowLoading -> showLoading()
                 is HomeState.HideLoading -> hideLoading()
-                is HomeState.ListCategories -> listCategories(state.listCategoriesResult)
-                is HomeState.Fail -> fail(state)
             }
         })
     }
@@ -72,14 +69,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun hideLoading() {
         linearLayoutProgressBar.visibility = View.GONE
-    }
-
-    private fun listCategories(listCategoriesResult: List<String?>?) {
-        Toast.makeText(this, "$listCategoriesResult", Toast.LENGTH_LONG).show()
-    }
-
-    private fun fail(state: HomeState.Fail) {
-        Toast.makeText(this, "$state ", Toast.LENGTH_LONG).show()
     }
 
 

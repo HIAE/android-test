@@ -2,6 +2,7 @@ package br.com.antoniocgrande.chucknoia.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.antoniocgrande.chucknoia.data.model.Category
 import br.com.antoniocgrande.chucknoia.domain.repositories.CategoriesRepositoryImpl
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -31,12 +32,12 @@ class ViewModel : ViewModel() {
             repository.listCategories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableObserver<List<String?>>() {
+                .subscribeWith(object : DisposableObserver<MutableList<Category>>() {
                     override fun onComplete() {
                         _stateCategories.value = HomeState.HideLoading
                     }
 
-                    override fun onNext(t: List<String?>?) {
+                    override fun onNext(t: MutableList<Category>) {
                         _stateCategories.postValue(HomeState.ListCategories(t))
                     }
 

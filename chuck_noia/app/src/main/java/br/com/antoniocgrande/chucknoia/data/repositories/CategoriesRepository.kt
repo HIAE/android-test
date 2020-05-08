@@ -1,5 +1,6 @@
 package br.com.antoniocgrande.chucknoia.data.repositories
 
+import br.com.antoniocgrande.chucknoia.data.model.Category
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 
@@ -13,6 +14,6 @@ import retrofit2.http.GET
 interface CategoriesRepository {
 
     @GET("jokes/categories")
-    fun listCategories(): Observable<List<String>>
+    fun listCategories(): Observable<MutableList<Category>>
 
 }
