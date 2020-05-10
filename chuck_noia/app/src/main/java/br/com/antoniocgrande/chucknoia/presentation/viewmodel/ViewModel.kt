@@ -3,13 +3,14 @@ package br.com.antoniocgrande.chucknoia.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.antoniocgrande.chucknoia.data.model.Category
-import br.com.antoniocgrande.chucknoia.domain.repositories.CategoriesRepositoryImpl
+import br.com.antoniocgrande.chucknoia.data.model.Joke
+import br.com.antoniocgrande.chucknoia.data.remote.CategoriesService
+import br.com.antoniocgrande.chucknoia.data.remote.RetrofitClient
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.observers.DisposableObserver
-import io.reactivex.rxjava3.schedulers.Schedulers
-
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 /* Copyright 2020.
  ************************************************************
@@ -20,32 +21,74 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  ************************************************************/
 class ViewModel : ViewModel() {
 
-    private val _stateCategories by lazy { MutableLiveData<HomeState>() }
-    private val repository by lazy { CategoriesRepositoryImpl() }
-    private val compositeDisposable by lazy { CompositeDisposable() }
 
-    fun getStateCategories() = _stateCategories
+    /**
+     *
+     * ATTRIBUTES
+     *
+     */
+    private val _state by lazy { MutableLiveData<HomeState>() }
+    private val dataService =
+        RetrofitClient().get().create(CategoriesService::class.java)
+
+
+    /**
+     *
+     * LIVEDATA METHODS
+     *
+     */
+    fun getState() = _state
 
     fun listCategories() {
-        _stateCategories.value = HomeState.ShowLoading
-        compositeDisposable.add(
-            repository.listCategories()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableObserver<MutableList<Category>>() {
-                    override fun onComplete() {
-                        _stateCategories.value = HomeState.HideLoading
-                    }
+        _state.value = HomeState.HideEmptyState
+        _state.value = HomeState.ShowLoading
+        dataService.listCategoriesService()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<List<Category>> {
+                override fun onComplete() {
+                    _state.value = HomeState.HideLoading
+                }
 
-                    override fun onNext(t: MutableList<Category>) {
-                        _stateCategories.postValue(HomeState.ListCategories(t))
-                    }
+                override fun onSubscribe(d: Disposable) {
 
-                    override fun onError(e: Throwable?) {
-                        _stateCategories.postValue(HomeState.Fail(e?.message))
-                    }
-                })
-        )
+                }
+
+                override fun onNext(t: List<Category>) {
+                    _state.postValue(HomeState.ListCategoriesSuccess(t))
+                }
+
+                override fun onError(e: Throwable) {
+                    _state.postValue(HomeState.ListCategoriesFail(e.message))
+                    _state.value = HomeState.HideLoading
+                }
+            })
+    }
+
+    fun getRandomJoke(category: Category) {
+        _state.value = HomeState.HideEmptyState
+        _state.value = HomeState.ShowLoading
+        dataService.randomJokeService(category)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<Joke> {
+                override fun onComplete() {
+                    _state.value = HomeState.HideLoading
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(t: Joke) {
+                    _state.postValue(HomeState.RandomJokeSuccess(t))
+                }
+
+                override fun onError(e: Throwable) {
+                    _state.postValue(HomeState.RandomJokeFail(e.message))
+                    _state.value = HomeState.HideLoading
+                }
+            })
     }
 
 }

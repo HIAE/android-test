@@ -3,7 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animationCache="true"
     tools:context=".presentation.fragments.JokeFragment">
 
+    <TextView
+        android:id="@+id/textViewRandomJoke"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:textSize="32sp"
+        tools:text="'It works on my machine' always holds true for Chuck Norris." />
+
+    <include
+        layout="@layout/empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

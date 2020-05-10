@@ -13,10 +13,15 @@
         <action
             android:id="@+id/action_categoriesFragment_to_jokeFragment"
             app:destination="@id/jokeFragment" />
+        <argument
+            android:name="CATEGORY"
+            app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/jokeFragment"
         android:name="br.com.antoniocgrande.chucknoia.presentation.fragments.JokeFragment"
         android:label="@string/label_jokes"
         tools:layout="@layout/fragment_joke" />
+
 </navigation>

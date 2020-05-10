@@ -7,6 +7,4 @@ package br.com.antoniocgrande.chucknoia.data.model
  * Created by  : antoniocgrande
  * Date        : 07/05/2020 09:08
  ************************************************************/
-data class Category(
-    var category: String? = null
-)
+typealias Category = String

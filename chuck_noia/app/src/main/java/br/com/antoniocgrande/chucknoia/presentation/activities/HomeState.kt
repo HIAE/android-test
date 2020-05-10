@@ -1,6 +1,7 @@
 package br.com.antoniocgrande.chucknoia.presentation.activities
 
 import br.com.antoniocgrande.chucknoia.data.model.Category
+import br.com.antoniocgrande.chucknoia.data.model.Joke
 
 /* Copyright 2020.
  ************************************************************
@@ -15,8 +16,14 @@ sealed class HomeState {
 
     object HideLoading : HomeState()
 
-    data class ListCategories(val listCategoriesResult: MutableList<Category>) : HomeState()
+    object HideEmptyState : HomeState()
 
-    data class Fail(val message: String?) : HomeState()
+    data class ListCategoriesSuccess(val listCategoriesResult: List<Category>) : HomeState()
+
+    data class ListCategoriesFail(val message: String?) : HomeState()
+
+    data class RandomJokeSuccess(val joke: Joke) : HomeState()
+
+    data class RandomJokeFail(val message: String?) : HomeState()
 
 }

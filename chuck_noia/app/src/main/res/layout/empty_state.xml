@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayoutEmptyState"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Opss, algo deu errado.\nPor favor, tente novamente."
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewTryAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Tentar novamente"
+            android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <!--        Chuck Norris doesn't need garbage collection because he doesn't call .Dispose(), he calls .DropKick().-->
+    <!--        Chuck Norris can access private methods.-->
+    <!--        Chuck Norris' programs never exit, they terminate.-->
+    <!--        Chuck Norris can write multi-threaded applications with a single thread.-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Chuck Norris' programs never exit, they terminate."
+        android:textColor="@color/gray2"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

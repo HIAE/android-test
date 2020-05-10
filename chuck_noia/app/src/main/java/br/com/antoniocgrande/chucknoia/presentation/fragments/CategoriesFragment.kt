@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.antoniocgrande.chucknoia.R
 import br.com.antoniocgrande.chucknoia.data.model.Category
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Companion.viewModel
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
 import br.com.antoniocgrande.chucknoia.presentation.adapters.CategoriesAdapter
+import kotlinx.android.synthetic.main.empty_state.*
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragment : Fragment() {
@@ -34,6 +35,7 @@ class CategoriesFragment : Fragment() {
         setupState()
         setupCategories()
         setupRecyclerView()
+        setupListeners()
     }
 
 
@@ -43,10 +45,11 @@ class CategoriesFragment : Fragment() {
      *
      */
     private fun setupState() {
-        viewModel.getStateCategories().observe(this, Observer { state ->
+        viewModel.getState().observe(this, Observer { state ->
             when (state) {
-                is HomeState.ListCategories -> listCategories(state.listCategoriesResult)
-                is HomeState.Fail -> fail(state)
+                is HomeState.ListCategoriesSuccess -> listCategoriesSuccess(state.listCategoriesResult)
+                is HomeState.ListCategoriesFail -> listCategoriesFail(state)
+                is HomeState.HideEmptyState -> hideEmptyState()
             }
         })
     }
@@ -60,20 +63,35 @@ class CategoriesFragment : Fragment() {
         layoutManager = LinearLayoutManager(requireContext())
     }
 
+    private fun setupListeners() {
+        textViewTryAgain.setOnClickListener { viewModel.listCategories() }
+    }
+
 
     /**
      *
      * STATE METHODS
      *
      */
-    private fun listCategories(listCategoriesResult: MutableList<Category>) {
+    private fun listCategoriesSuccess(listCategoriesResult: List<Category>) {
         recyclerViewCategories.adapter = CategoriesAdapter(listCategoriesResult) {
-            Toast.makeText(activity, "clicado $it", Toast.LENGTH_LONG).show()
+            Navigation.findNavController(requireActivity(), R.id.fragmentNavHost)
+                .navigate(R.id.action_categoriesFragment_to_jokeFragment, Bundle().apply {
+                    putString("CATEGORY", it)
+                })
         }
     }
 
-    private fun fail(state: HomeState.Fail) {
+    private fun listCategoriesFail(state: HomeState.ListCategoriesFail) {
+        showEmptyState()
+    }
 
+    private fun showEmptyState() {
+        constraintLayoutEmptyState.visibility = View.VISIBLE
+    }
+
+    private fun hideEmptyState() {
+        constraintLayoutEmptyState.visibility = View.GONE
     }
 
 }

@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupState() {
-        viewModel.getStateCategories().observe(this, Observer { state ->
+        viewModel.getState().observe(this, Observer { state ->
             when (state) {
                 is HomeState.ShowLoading -> showLoading()
                 is HomeState.HideLoading -> hideLoading()
