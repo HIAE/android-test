@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.antoniocgrande.chucknoia.R
@@ -13,6 +14,7 @@ import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Comp
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
 import kotlinx.android.synthetic.main.empty_state.*
 import kotlinx.android.synthetic.main.fragment_joke.*
+
 
 class JokeFragment : Fragment() {
 
@@ -42,6 +44,7 @@ class JokeFragment : Fragment() {
         setupState()
         setupJoke()
         setupListeners()
+        setupToolbar()
     }
 
 
@@ -72,6 +75,10 @@ class JokeFragment : Fragment() {
 
     private fun setupListeners() {
         textViewTryAgain.setOnClickListener { arg?.let { viewModel.getRandomJoke(it) } }
+    }
+
+    private fun setupToolbar() {
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.subtitle = arg
     }
 
 

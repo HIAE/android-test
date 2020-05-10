@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -36,6 +37,7 @@ class CategoriesFragment : Fragment() {
         setupCategories()
         setupRecyclerView()
         setupListeners()
+        setupToolbar()
     }
 
 
@@ -65,6 +67,10 @@ class CategoriesFragment : Fragment() {
 
     private fun setupListeners() {
         textViewTryAgain.setOnClickListener { viewModel.listCategories() }
+    }
+
+    private fun setupToolbar() {
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.subtitle = ""
     }
 
 
