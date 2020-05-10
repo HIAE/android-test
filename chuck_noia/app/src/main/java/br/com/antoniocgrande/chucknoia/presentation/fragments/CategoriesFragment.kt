@@ -50,7 +50,7 @@ class CategoriesFragment : Fragment() {
         viewModel.getState().observe(this, Observer { state ->
             when (state) {
                 is HomeState.ListCategoriesSuccess -> listCategoriesSuccess(state.listCategoriesResult)
-                is HomeState.ListCategoriesFail -> listCategoriesFail(state)
+                is HomeState.ListCategoriesFail -> listCategoriesFail()
                 is HomeState.HideEmptyState -> hideEmptyState()
             }
         })
@@ -88,7 +88,7 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    private fun listCategoriesFail(state: HomeState.ListCategoriesFail) {
+    private fun listCategoriesFail() {
         showEmptyState()
     }
 

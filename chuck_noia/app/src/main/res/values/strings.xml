@@ -2,4 +2,8 @@
     <string name="app_name">Chuck Nóia</string>
     <string name="label_categories">Categories</string>
     <string name="label_jokes">Joke</string>
+    <string name="refresh_joke">Refresh Joke</string>
+    <string name="error_message">Oops, something went wrong.\nPlease try again.</string>
+    <string name="try_again">Try again</string>
+    <string name="default_joke_error_message">Chuck Norris\' programs never exit, they terminate.</string>
 </resources>

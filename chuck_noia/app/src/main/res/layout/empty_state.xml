@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:text="Opss, algo deu errado.\nPor favor, tente novamente."
+            android:text="@string/error_message"
             android:textSize="16sp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Tentar novamente"
+            android:text="@string/try_again"
             android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
@@ -35,14 +35,13 @@
     <!--        Chuck Norris can access private methods.-->
     <!--        Chuck Norris' programs never exit, they terminate.-->
     <!--        Chuck Norris can write multi-threaded applications with a single thread.-->
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Chuck Norris' programs never exit, they terminate."
+        android:text="@string/default_joke_error_message"
         android:textColor="@color/gray2"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent" />

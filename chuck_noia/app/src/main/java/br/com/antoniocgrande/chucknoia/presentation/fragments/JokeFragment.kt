@@ -63,7 +63,7 @@ class JokeFragment : Fragment() {
         viewModel.getState().observe(this, Observer { state ->
             when (state) {
                 is HomeState.RandomJokeSuccess -> randomJokeSuccess(state.joke)
-                is HomeState.RandomJokeFail -> randomJokeFail(state)
+                is HomeState.RandomJokeFail -> randomJokeFail()
                 is HomeState.HideEmptyState -> hideEmptyState()
             }
         })
@@ -79,7 +79,7 @@ class JokeFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (requireActivity() as AppCompatActivity?)?.supportActionBar?.subtitle = arg
+        (requireActivity() as AppCompatActivity?)?.supportActionBar?.subtitle = "#$arg"
     }
 
 
@@ -92,7 +92,7 @@ class JokeFragment : Fragment() {
         textViewRandomJoke.text = randomJoke.value
     }
 
-    private fun randomJokeFail(state: HomeState.RandomJokeFail) {
+    private fun randomJokeFail() {
         showEmptyState()
     }
 
