@@ -13,8 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
+        android:fontFamily="serif"
         android:gravity="center"
+        android:scrollbars="vertical"
         android:textSize="32sp"
+        android:textStyle="italic"
         tools:text="'It works on my machine' always holds true for Chuck Norris." />
 
     <TextView

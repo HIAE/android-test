@@ -6,4 +6,5 @@
     <string name="error_message">Oops, something went wrong.\nPlease try again.</string>
     <string name="try_again">Try again</string>
     <string name="default_joke_error_message">Chuck Norris\' programs never exit, they terminate.</string>
+    <string name="app_info"><b>Chuck Nóia</b> is a app for hand curated Chuck Norris facts.</string>
 </resources>

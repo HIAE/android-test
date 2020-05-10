@@ -1,6 +1,7 @@
 package br.com.antoniocgrande.chucknoia.presentation.fragments
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class JokeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
         setupAttributes()
         setupState()
         setupJoke()
@@ -53,6 +55,10 @@ class JokeFragment : Fragment() {
      * SETUP METHODS
      *
      */
+    private fun setupViews() {
+        textViewRandomJoke.movementMethod = ScrollingMovementMethod()
+    }
+
     private fun setupAttributes() {
         arg = arguments?.run {
             getString("CATEGORY") as Category
