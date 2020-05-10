@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Chuck Nóia</string>
-    <string name="label_categories">Categorias</string>
-    <string name="label_jokes">Piada</string>
+    <string name="label_categories">Categories</string>
+    <string name="label_jokes">Joke</string>
 </resources>

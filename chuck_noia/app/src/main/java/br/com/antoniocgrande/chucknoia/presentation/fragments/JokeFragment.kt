@@ -75,6 +75,7 @@ class JokeFragment : Fragment() {
 
     private fun setupListeners() {
         textViewTryAgain.setOnClickListener { arg?.let { viewModel.getRandomJoke(it) } }
+        textViewRefreshJoke.setOnClickListener { textViewTryAgain.performClick() }
     }
 
     private fun setupToolbar() {

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:animationCache="true"
     tools:context=".presentation.fragments.JokeFragment">
 
@@ -15,9 +17,19 @@
         android:textSize="32sp"
         tools:text="'It works on my machine' always holds true for Chuck Norris." />
 
+    <TextView
+        android:id="@+id/textViewRefreshJoke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sortear"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <include
         layout="@layout/empty_state"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
