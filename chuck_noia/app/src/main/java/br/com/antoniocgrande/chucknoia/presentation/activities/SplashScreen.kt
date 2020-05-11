@@ -26,18 +26,9 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        object : CountDownTimer(5000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-
-            }
-
-            override fun onFinish() {
-                startActivity(Intent(this@SplashScreen, HomeActivity::class.java))
-            }
-        }.start()
-
-
         setupView()
+        setupToolbar()
+        setupTimer()
     }
 
 
@@ -48,11 +39,27 @@ class SplashScreen : AppCompatActivity() {
      */
     private fun setupView() {
         setContentView(R.layout.splash_screen)
+    }
 
+    private fun setupToolbar() {
         this.window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
     }
+
+    private fun setupTimer() {
+        object : CountDownTimer(5000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            override fun onFinish() {
+                startActivity(Intent(this@SplashScreen, HomeActivity::class.java))
+                finish()
+            }
+        }.start()
+    }
+
 
 }

@@ -11,13 +11,16 @@
     <TextView
         android:id="@+id/textViewRandomJoke"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_height="0dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:scrollbars="vertical"
         android:textSize="32sp"
         android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@id/textViewRefreshJoke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="'It works on my machine' always holds true for Chuck Norris." />
 
     <TextView
