@@ -11,10 +11,11 @@ import androidx.lifecycle.Observer
 import br.com.antoniocgrande.chucknoia.R
 import br.com.antoniocgrande.chucknoia.data.model.Category
 import br.com.antoniocgrande.chucknoia.data.model.Joke
-import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Companion.viewModel
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
+import br.com.antoniocgrande.chucknoia.presentation.viewmodel.ViewModel
 import kotlinx.android.synthetic.main.empty_state.*
 import kotlinx.android.synthetic.main.fragment_joke.*
+import org.koin.android.ext.android.inject
 
 
 class JokeFragment : Fragment() {
@@ -26,6 +27,7 @@ class JokeFragment : Fragment() {
      *
      */
     private var arg: Category? = null
+    private val viewModel: ViewModel by inject()
 
 
     /**

@@ -11,13 +11,22 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.antoniocgrande.chucknoia.R
 import br.com.antoniocgrande.chucknoia.data.model.Category
-import br.com.antoniocgrande.chucknoia.presentation.activities.HomeActivity.Companion.viewModel
 import br.com.antoniocgrande.chucknoia.presentation.activities.HomeState
 import br.com.antoniocgrande.chucknoia.presentation.adapters.CategoriesAdapter
+import br.com.antoniocgrande.chucknoia.presentation.viewmodel.ViewModel
 import kotlinx.android.synthetic.main.empty_state.*
 import kotlinx.android.synthetic.main.fragment_categories.*
+import org.koin.android.ext.android.inject
 
 class CategoriesFragment : Fragment() {
+
+
+    /**
+     *
+     * ATRIBUTES
+     *
+     */
+    private val viewModel: ViewModel by inject()
 
 
     /**

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:animationCache="true"
     tools:context=".presentation.fragments.JokeFragment">
 
@@ -12,6 +11,7 @@
         android:id="@+id/textViewRandomJoke"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="16dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:scrollbars="vertical"
@@ -27,6 +27,7 @@
         android:id="@+id/textViewRefreshJoke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:gravity="center"
         android:text="@string/refresh_joke"
         android:textColor="@color/colorPrimary"

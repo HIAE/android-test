@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import br.com.antoniocgrande.chucknoia.R
 import br.com.antoniocgrande.chucknoia.presentation.viewmodel.ViewModel
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
 
 class HomeActivity : AppCompatActivity() {
 
@@ -18,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
      * ATRIBUTES
      *
      */
+    private val viewModel: ViewModel by inject()
     private val navController by lazy { Navigation.findNavController(this, R.id.fragmentNavHost) }
 
 
@@ -69,11 +71,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun hideLoading() {
         linearLayoutProgressBar.visibility = View.GONE
-    }
-
-
-    companion object {
-        val viewModel by lazy { ViewModel() }
     }
 
 }
