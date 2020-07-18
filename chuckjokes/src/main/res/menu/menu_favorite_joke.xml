@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/favorite_joke_white"
+        android:icon="@drawable/ic_favorite_white_24dp"
+        android:title="@string/favorite_joke"
+        app:showAsAction="always">
+
+    </item>
+
+    <item
+        android:id="@+id/favorite_joke_board"
+        android:icon="@drawable/ic_favorite_board_24dp"
+        android:title="@string/joke_checked"
+        app:showAsAction="always">
+
+    </item>
+
+</menu>
