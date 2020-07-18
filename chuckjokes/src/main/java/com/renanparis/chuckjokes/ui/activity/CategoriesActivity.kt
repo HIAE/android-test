@@ -1,5 +1,6 @@
 package com.renanparis.chuckjokes.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -58,6 +59,8 @@ class CategoriesActivity : AppCompatActivity() {
     }
 
     private fun showJoke(category: String) {
-        Toast.makeText(this, category, Toast.LENGTH_LONG).show()
+        val intent = Intent(this, RandomJokeActivity::class.java)
+        intent.putExtra("category", category)
+        startActivity(intent)
     }
 }
