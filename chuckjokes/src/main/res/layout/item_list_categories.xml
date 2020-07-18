@@ -17,7 +17,8 @@
         android:textSize="16sp"
         android:padding="4dp"
         tools:text="Example"
-        android:textAlignment="center">
+        android:textAlignment="center"
+        android:textColor="@android:color/black">
     </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

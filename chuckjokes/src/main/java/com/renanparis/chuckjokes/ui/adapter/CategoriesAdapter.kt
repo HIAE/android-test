@@ -41,8 +41,10 @@ class CategoriesAdapter(
         private val textJoke by lazy { itemView.tv_list_category }
 
         init {
-            if (::category.isInitialized) {
-                onItemClickListener(category)
+            itemView.setOnClickListener {
+                if (::category.isInitialized) {
+                    onItemClickListener(category)
+                }
             }
         }
 

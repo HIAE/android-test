@@ -44,7 +44,6 @@ class CategoriesActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
     private fun configRecyclerView() {
@@ -53,7 +52,7 @@ class CategoriesActivity : AppCompatActivity() {
     }
 
     private fun configAdapter() {
-        adapter.onItemClickListener = {category->
+        adapter.onItemClickListener = { category ->
             showJoke(category)
         }
     }
