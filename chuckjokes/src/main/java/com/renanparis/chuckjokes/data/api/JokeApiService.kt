@@ -10,6 +10,6 @@ interface JokeApiService {
      fun getJoke(@Query("category") category: String): Joke
 
     @GET("categories")
-    fun getCategories(): List<String>
+    suspend fun getCategories(): List<String>
 
 }
