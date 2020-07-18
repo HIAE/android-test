@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_list_categories.view.*
 class CategoriesAdapter(
         private val context: Context,
         private val categories: MutableList<String> = mutableListOf(),
-        val onItemClickListener: (category: String) -> Unit = {}
+        var onItemClickListener: (category: String) -> Unit = {}
 ) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
 
@@ -26,6 +26,12 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categories[position])
+    }
+
+    fun update(categories: List<String>) {
+        this.categories.clear()
+        this.categories.addAll(categories)
+        notifyDataSetChanged()
     }
 
 
