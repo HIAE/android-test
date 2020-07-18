@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_list_categories.view.*
 
 class CategoriesAdapter(
         private val context: Context,
-        private val categories: List<String> = mutableListOf(),
+        private val categories: MutableList<String> = mutableListOf(),
         val onItemClickListener: (category: String) -> Unit = {}
 ) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
