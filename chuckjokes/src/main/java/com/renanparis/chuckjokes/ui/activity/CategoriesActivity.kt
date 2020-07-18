@@ -1,7 +1,8 @@
-package com.renanparis.chuckjokes
+package com.renanparis.chuckjokes.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.renanparis.chuckjokes.R
 
 class CategoriesActivity : AppCompatActivity() {
 
