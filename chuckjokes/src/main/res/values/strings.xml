@@ -5,5 +5,8 @@
     <string name="favorites_jokes">List of Favorites Jokes</string>
     <string name="message_add_favorite">Your favorite joke has been added</string>
     <string name="message_remove_favorite">Your favorite joke has been removed</string>
+    <string name="message_warning_dialog">Unable to load the information. Please check your connection or try later.</string>
+    <string name="name_botton_warning_dialog">Ok.</string>
+
 
 </resources>

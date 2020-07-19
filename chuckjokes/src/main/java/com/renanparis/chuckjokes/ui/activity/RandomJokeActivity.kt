@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
+import com.renanparis.chuckjokes.ui.activity.CategoriesActivity.Companion.KEY_CATEGORY_JOKE
 import com.renanparis.chuckjokes.ui.activity.utils.showMessage
+import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
 import kotlinx.android.synthetic.main.activity_random_joke.*
@@ -22,7 +23,7 @@ class RandomJokeActivity : AppCompatActivity() {
     private val viewModel: RandomJokeViewModel by viewModel()
     private lateinit var joke: Joke
     private val category: String by lazy {
-        intent.getStringExtra("category")
+        intent.getStringExtra(KEY_CATEGORY_JOKE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,10 +42,10 @@ class RandomJokeActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.favorite_joke_white -> {
-                    joke.favorite = true
-                    saveFavoriteJoke()
-                    invalidateOptionsMenu()
-                }
+                joke.favorite = true
+                saveFavoriteJoke()
+                invalidateOptionsMenu()
+            }
 
             R.id.favorite_joke_board -> {
                 joke.favorite = false
@@ -60,22 +61,20 @@ class RandomJokeActivity : AppCompatActivity() {
     }
 
     private fun deleteFavoriteJoke() {
-        viewModel.deleteJoke(joke).observe(this, Observer {resources->
+        viewModel.deleteJoke(joke).observe(this, Observer { resources ->
             if (resources.status == Status.SUCCESS) {
                 showMessage(textJoke, getString(R.string.message_remove_favorite))
-            }
-            else if (resources.status == Status.ERROR) {
+            } else if (resources.status == Status.ERROR) {
                 showMessage(textJoke, resources.message.toString())
             }
         })
     }
 
     private fun saveFavoriteJoke() {
-        viewModel.saveJoke(joke).observe(this, Observer {resources->
+        viewModel.saveJoke(joke).observe(this, Observer { resources ->
             if (resources.status == Status.SUCCESS) {
                 showMessage(textJoke, getString(R.string.message_add_favorite))
-            }
-            else if (resources.status == Status.ERROR) {
+            } else if (resources.status == Status.ERROR) {
                 showMessage(textJoke, resources.message.toString())
             }
         })
@@ -104,13 +103,17 @@ class RandomJokeActivity : AppCompatActivity() {
 
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        val dialog = ItemNotFoundDialog(this)
+                        dialog.onItemClickListener = {
+                            finish()
+                        }
+                        dialog.show()
                     }
                     Status.SUCCESS -> {
-                        resource.data?.let {
-                            joke = it
+                        resource.data?.let { jokeReceived ->
+                            joke = jokeReceived
                         }
-                        textJoke.text = joke?.value
+                        textJoke.text = joke.value
                     }
                 }
             }
