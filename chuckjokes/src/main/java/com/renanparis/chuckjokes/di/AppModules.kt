@@ -5,6 +5,7 @@ import com.renanparis.chuckjokes.data.api.JokeWebClient
 import com.renanparis.chuckjokes.data.database.AppDataBase
 import com.renanparis.chuckjokes.data.repository.JokeRepository
 import com.renanparis.chuckjokes.ui.adapter.CategoriesAdapter
+import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
 import com.renanparis.chuckjokes.ui.viewmodel.CategoryViewModel
 import com.renanparis.chuckjokes.ui.viewmodel.FavoritesJokesViewModel
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
@@ -18,6 +19,7 @@ private const val NAME_DATABASE = "jokes.db"
 
 val uiModule = module {
     factory<CategoriesAdapter> { CategoriesAdapter(get()) }
+    factory<FavoritesJokesAdapter> { FavoritesJokesAdapter(get()) }
 }
 
 val dataModule = module {
