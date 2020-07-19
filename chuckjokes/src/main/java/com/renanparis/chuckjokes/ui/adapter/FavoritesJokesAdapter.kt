@@ -15,7 +15,7 @@ class FavoritesJokesAdapter(private val context: Context,
 ) : RecyclerView.Adapter<FavoritesJokesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewCreated = LayoutInflater.from(context).inflate(R.layout.activity_favorites_jokes
+        val viewCreated = LayoutInflater.from(context).inflate(R.layout.item_list_favorites_jokes
                 , parent, false)
         return ViewHolder(viewCreated)
     }
@@ -34,7 +34,7 @@ class FavoritesJokesAdapter(private val context: Context,
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var joke: Joke
-        private val textJoke by lazy { itemView.tv_list_favorites_joke }
+        private val textFavoriteJoke = itemView.tv_list_favorites_joke
 
         init {
             itemView.setOnClickListener {
@@ -46,8 +46,7 @@ class FavoritesJokesAdapter(private val context: Context,
 
         fun bind(joke: Joke) {
             this.joke = joke
-            textJoke.text = joke.value
+            textFavoriteJoke.text = joke.value
         }
-
     }
 }

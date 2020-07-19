@@ -40,10 +40,8 @@ class FavoritesJokesActivity : AppCompatActivity() {
                 Status.ERROR -> {
                     Toast.makeText(this, resources.message, Toast.LENGTH_LONG).show()
                 }
-
             }
         })
-
     }
 
     private fun configRecyclerView() {
@@ -55,6 +53,5 @@ class FavoritesJokesActivity : AppCompatActivity() {
         adapter.onItemClickListener = {joke->
             Toast.makeText(this, joke.id, Toast.LENGTH_LONG).show()
         }
-
     }
 }

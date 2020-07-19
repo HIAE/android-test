@@ -1,5 +1,6 @@
 package com.renanparis.chuckjokes.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -48,6 +49,10 @@ class RandomJokeActivity : AppCompatActivity() {
                 joke.favorite = false
                 deleteFavoriteJoke()
                 invalidateOptionsMenu()
+            }
+
+            R.id.list_favorites_jokes -> {
+                startActivity(Intent(this, FavoritesJokesActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
