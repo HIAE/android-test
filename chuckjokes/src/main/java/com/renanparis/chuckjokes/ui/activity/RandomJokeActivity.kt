@@ -6,10 +6,8 @@ import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
-import com.renanparis.chuckjokes.R.color.colorAccent
 import com.renanparis.chuckjokes.data.model.Joke
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
@@ -48,18 +46,28 @@ class RandomJokeActivity : AppCompatActivity() {
 
             R.id.favorite_joke_board -> {
                 joke.favorite = false
-                deletFavoriteJoke()
+                deleteFavoriteJoke()
                 invalidateOptionsMenu()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deletFavoriteJoke() {
+    private fun deleteFavoriteJoke() {
+        viewModel.deleteJoke(joke).observe(this, Observer {
+            if (it.status == Status.ERROR) {
+                TODO ("mensaem erro ou mensagem de sucesso")
+            }
+        })
 
     }
 
     private fun saveFavoriteJoke() {
+        viewModel.saveJoke(joke).observe(this, Observer {
+            if (it.status == Status.ERROR) {
+                TODO ("mensaem erro ou mensagem de sucesso")
+            }
+        })
 
     }
 
