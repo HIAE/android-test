@@ -18,4 +18,13 @@
 
     </item>
 
+    <item
+        android:id="@+id/list_favorites_jokes"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        android:title="@string/favorites_jokes"
+        app:showAsAction="ifRoom">
+    </item>
+
+
+
 </menu>

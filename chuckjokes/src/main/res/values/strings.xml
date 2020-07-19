@@ -2,4 +2,5 @@
     <string name="app_name">Chuck Jokes</string>
     <string name="favorite_joke">Favorite Joke</string>
     <string name="joke_checked">Joke on the Favorite List</string>
+    <string name="favorites_jokes">List of Favorites Jokes</string>
 </resources>

@@ -2,7 +2,9 @@ package com.renanparis.chuckjokes.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.Expose
+import com.renanparis.chuckjokes.data.database.converter.ListStringConverter
 
 @Entity
 data class Joke(

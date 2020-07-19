@@ -3,6 +3,7 @@ package com.renanparis.chuckjokes.di
 import androidx.room.Room
 import com.renanparis.chuckjokes.data.api.JokeWebClient
 import com.renanparis.chuckjokes.data.database.AppDataBase
+import com.renanparis.chuckjokes.data.database.dao.JokeDao
 import com.renanparis.chuckjokes.data.repository.JokeRepository
 import com.renanparis.chuckjokes.ui.adapter.CategoriesAdapter
 import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
@@ -28,6 +29,7 @@ val dataModule = module {
     single<CategoryUseCase> { CategoryUseCase(get()) }
     single<RandomJokeUseCase> { RandomJokeUseCase(get()) }
     single<FavoritesJokeUseCase> { FavoritesJokeUseCase(get()) }
+    single<JokeDao> { get<AppDataBase>().jokeDao() }
     single<AppDataBase> {
         Room.databaseBuilder(
                 get(),
