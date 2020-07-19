@@ -5,7 +5,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
+import com.renanparis.chuckjokes.data.model.Joke
+import com.renanparis.chuckjokes.ui.activity.utils.showMessage
 import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
+import com.renanparis.chuckjokes.ui.dialog.RemoveFavoriteJokeDialog
 import com.renanparis.chuckjokes.ui.viewmodel.FavoritesJokesViewModel
 import com.renanparis.chuckjokes.utils.Status
 import kotlinx.android.synthetic.main.activity_favorites_jokes.*
@@ -50,8 +53,23 @@ class FavoritesJokesActivity : AppCompatActivity() {
     }
 
     private fun configAdapter() {
+        val dialog = RemoveFavoriteJokeDialog(this)
         adapter.onItemClickListener = {joke->
-            Toast.makeText(this, joke.id, Toast.LENGTH_LONG).show()
+            dialog.show()
+            dialog.onItemClickListener = {
+                removeFavoriteJoke(joke)
+                adapter.removeFavoriteJoke(joke)
+            }
         }
+    }
+
+    private fun removeFavoriteJoke(joke: Joke) {
+        viewModel.removeFavoriteJoke(joke).observe(this, Observer {resources ->
+            if (resources.status == Status.SUCCESS) {
+                showMessage(rv_favorites_jokes_list, getString(R.string.message_remove_favorite))
+            } else if (resources.status == Status.ERROR) {
+                showMessage(rv_favorites_jokes_list, resources.message.toString())
+            }
+        })
     }
 }

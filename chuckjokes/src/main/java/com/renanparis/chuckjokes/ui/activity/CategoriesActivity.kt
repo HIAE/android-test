@@ -50,11 +50,7 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
                 }
                 Status.ERROR -> {
                     rv_list_category.visibility = View.GONE
-                    val dialog = ItemNotFoundDialog(this)
-                    dialog.onItemClickListener = {dialog ->
-                        dialog.dismiss()
-                    }
-                    dialog.show()
+                    ItemNotFoundDialog(this).show()
                 }
             }
         })

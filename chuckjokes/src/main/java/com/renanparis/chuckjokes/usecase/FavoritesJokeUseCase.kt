@@ -1,6 +1,7 @@
 package com.renanparis.chuckjokes.usecase
 
 import androidx.lifecycle.liveData
+import com.renanparis.chuckjokes.data.model.Joke
 import com.renanparis.chuckjokes.data.repository.JokeRepository
 import com.renanparis.chuckjokes.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,14 @@ class FavoritesJokeUseCase(private val repository: JokeRepository) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = repository.getFavoritesJoke()))
+        }catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message.toString()))
+        }
+    }
+
+    fun removeFavoriteJoke(joke: Joke) = liveData(Dispatchers.IO) {
+        try {
+            emit(Resource.success(data =repository.deleteJoke(joke)))
         }catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message.toString()))
         }

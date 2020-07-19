@@ -32,6 +32,12 @@ class FavoritesJokesAdapter(private val context: Context,
         notifyDataSetChanged()
     }
 
+    fun removeFavoriteJoke(joke: Joke) {
+        val position = jokes.indexOf(joke)
+        jokes.remove(joke)
+        notifyItemRemoved(position)
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var joke: Joke
         private val textFavoriteJoke = itemView.tv_list_favorites_joke
