@@ -102,7 +102,6 @@ class RandomJokeActivity : AppCompatActivity() {
                         textJoke.text = joke?.value
                     }
                 }
-
             }
         })
     }

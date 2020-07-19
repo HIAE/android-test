@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.RandomJokeActivity"></activity>
+        <activity android:name=".ui.activity.FavoritesJokesActivity"></activity>
+        <activity android:name=".ui.activity.RandomJokeActivity" />
         <activity android:name=".ui.activity.CategoriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
