@@ -3,4 +3,7 @@
     <string name="favorite_joke">Favorite Joke</string>
     <string name="joke_checked">Joke on the Favorite List</string>
     <string name="favorites_jokes">List of Favorites Jokes</string>
+    <string name="message_add_favorite">Your favorite joke has been added</string>
+    <string name="message_remove_favorite">Your favorite joke has been removed</string>
+
 </resources>

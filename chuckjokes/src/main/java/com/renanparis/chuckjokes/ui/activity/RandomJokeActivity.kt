@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
+import com.renanparis.chuckjokes.ui.activity.utils.showMessage
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
 import kotlinx.android.synthetic.main.activity_random_joke.*
@@ -59,18 +60,23 @@ class RandomJokeActivity : AppCompatActivity() {
     }
 
     private fun deleteFavoriteJoke() {
-        viewModel.deleteJoke(joke).observe(this, Observer {
-            if (it.status == Status.ERROR) {
-                TODO ("mensaem erro ou mensagem de sucesso")
+        viewModel.deleteJoke(joke).observe(this, Observer {resources->
+            if (resources.status == Status.SUCCESS) {
+                showMessage(textJoke, getString(R.string.message_remove_favorite))
+            }
+            else if (resources.status == Status.ERROR) {
+                showMessage(textJoke, resources.message.toString())
             }
         })
-
     }
 
     private fun saveFavoriteJoke() {
-        viewModel.saveJoke(joke).observe(this, Observer {
-            if (it.status == Status.ERROR) {
-                TODO ("mensaem erro ou mensagem de sucesso")
+        viewModel.saveJoke(joke).observe(this, Observer {resources->
+            if (resources.status == Status.SUCCESS) {
+                showMessage(textJoke, getString(R.string.message_add_favorite))
+            }
+            else if (resources.status == Status.ERROR) {
+                showMessage(textJoke, resources.message.toString())
             }
         })
 

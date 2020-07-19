@@ -22,7 +22,7 @@ class RandomJokeUseCase(private val repository: JokeRepository) {
     fun deleteJoke(joke: Joke) = liveData(Dispatchers.IO) {
 
         try {
-            repository.deleteJoke(joke)
+            emit(Resource.success(data =repository.deleteJoke(joke)))
         }catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message.toString()))
         }
@@ -31,7 +31,7 @@ class RandomJokeUseCase(private val repository: JokeRepository) {
     fun saveJoke(joke: Joke) = liveData(Dispatchers.IO) {
 
         try {
-            repository.saveJoke(joke)
+            emit(Resource.success(data = repository.saveJoke(joke)))
         }catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message.toString()))
         }
