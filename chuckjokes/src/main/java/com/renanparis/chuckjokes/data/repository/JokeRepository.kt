@@ -15,4 +15,6 @@ class JokeRepository(private val jokeWebClient: JokeWebClient,
 
     suspend fun saveJoke(joke: Joke) = dao.saveJoke(joke)
 
+    suspend fun getFavoritesJoke() = dao.getJokes()
+
 }

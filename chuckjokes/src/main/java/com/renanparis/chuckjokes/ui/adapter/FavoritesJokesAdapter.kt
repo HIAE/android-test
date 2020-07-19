@@ -26,6 +26,12 @@ class FavoritesJokesAdapter(private val context: Context,
         holder.bind(jokes[position])
     }
 
+    fun update(jokes: List<Joke>) {
+        this.jokes.clear()
+        this.jokes.addAll(jokes)
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var joke: Joke
         private val textJoke by lazy { itemView.tv_list_favorites_joke }
