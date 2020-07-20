@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
-import com.renanparis.chuckjokes.ui.activity.utils.showMessage
+import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
 import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
 import com.renanparis.chuckjokes.ui.dialog.RemoveFavoriteJokeDialog
 import com.renanparis.chuckjokes.ui.viewmodel.FavoritesJokesViewModel
@@ -66,9 +66,9 @@ class FavoritesJokesActivity : AppCompatActivity() {
     private fun removeFavoriteJoke(joke: Joke) {
         viewModel.removeFavoriteJoke(joke).observe(this, Observer {resources ->
             if (resources.status == Status.SUCCESS) {
-                showMessage(rv_favorites_jokes_list, getString(R.string.message_remove_favorite))
+                showMessage(getString(R.string.message_remove_favorite))
             } else if (resources.status == Status.ERROR) {
-                showMessage(rv_favorites_jokes_list, resources.message.toString())
+                showMessage(resources.message.toString())
             }
         })
     }

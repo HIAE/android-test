@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
 import com.renanparis.chuckjokes.ui.activity.CategoriesActivity.Companion.KEY_CATEGORY_JOKE
-import com.renanparis.chuckjokes.ui.activity.utils.showMessage
+import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
 import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
@@ -63,9 +63,9 @@ class RandomJokeActivity : AppCompatActivity() {
     private fun deleteFavoriteJoke() {
         viewModel.deleteJoke(joke).observe(this, Observer { resources ->
             if (resources.status == Status.SUCCESS) {
-                showMessage(textJoke, getString(R.string.message_remove_favorite))
+                showMessage(getString(R.string.message_remove_favorite))
             } else if (resources.status == Status.ERROR) {
-                showMessage(textJoke, resources.message.toString())
+                showMessage( resources.message.toString())
             }
         })
     }
@@ -73,9 +73,9 @@ class RandomJokeActivity : AppCompatActivity() {
     private fun saveFavoriteJoke() {
         viewModel.saveJoke(joke).observe(this, Observer { resources ->
             if (resources.status == Status.SUCCESS) {
-                showMessage(textJoke, getString(R.string.message_add_favorite))
+                showMessage(getString(R.string.message_add_favorite))
             } else if (resources.status == Status.ERROR) {
-                showMessage(textJoke, resources.message.toString())
+                showMessage(resources.message.toString())
             }
         })
 

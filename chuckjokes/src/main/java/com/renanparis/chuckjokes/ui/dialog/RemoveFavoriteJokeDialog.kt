@@ -9,8 +9,7 @@ class RemoveFavoriteJokeDialog(private val context: Context,
 
     fun show() {
         AlertDialog.Builder(context)
-                .setTitle(context.getString(title_remove_favorite_joke_dialog))
-                .setMessage(context.getString(message_remove_favorite))
+                .setMessage(context.getString(message_confirm_remove_favorite_joke))
                 .setNegativeButton(context.getString(name_negative_button_remove_favorite_joke_dialog)) { dialog, _ ->
                     dialog.dismiss()
                 }
