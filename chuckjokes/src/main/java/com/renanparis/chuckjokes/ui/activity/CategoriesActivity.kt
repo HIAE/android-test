@@ -2,6 +2,8 @@ package com.renanparis.chuckjokes.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -27,6 +29,24 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
         configRecyclerView()
         searchCategories()
         initConnectionListener()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_categories, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.list_favorites_jokes ->
+                goToFavoritesList()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun goToFavoritesList() {
+        startActivity(Intent(this, FavoritesJokesActivity::class.java))
+
     }
 
     private fun initConnectionListener() {
