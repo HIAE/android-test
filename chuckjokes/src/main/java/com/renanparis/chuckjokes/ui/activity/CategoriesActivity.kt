@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.GridLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.ui.adapter.CategoriesAdapter
 import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
@@ -77,6 +79,7 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
     }
 
     private fun configRecyclerView() {
+        rv_list_category.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         rv_list_category.adapter = adapter
         configAdapter()
     }
