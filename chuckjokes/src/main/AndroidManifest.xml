@@ -21,11 +21,6 @@
         <activity android:name=".ui.activity.FavoritesJokesActivity" />
         <activity android:name=".ui.activity.RandomJokeActivity" />
         <activity android:name=".ui.activity.CategoriesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
