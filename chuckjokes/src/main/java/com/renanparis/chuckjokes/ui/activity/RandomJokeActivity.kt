@@ -124,6 +124,8 @@ class RandomJokeActivity : AppCompatActivity() {
                         }
                         textJoke.text = joke.value
                         Picasso.get().load(joke.icon_url).into(imageJoke)
+                        invalidateOptionsMenu()
+
                     }
                 }
             }
