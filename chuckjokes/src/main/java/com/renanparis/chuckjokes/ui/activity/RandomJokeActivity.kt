@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,12 +17,16 @@ import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
 import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_random_joke.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RandomJokeActivity : AppCompatActivity() {
 
     private lateinit var textJoke: TextView
+    private lateinit var imageJoke: ImageView
+    private lateinit var btnJoke: Button
+
     private val viewModel: RandomJokeViewModel by viewModel()
     private lateinit var joke: Joke
     private val category: String by lazy {
@@ -100,9 +107,10 @@ class RandomJokeActivity : AppCompatActivity() {
                 when (resource.status) {
 
                     Status.LOADING -> {
-
+                        random_joke_progress.visibility = View.VISIBLE
                     }
                     Status.ERROR -> {
+                        random_joke_progress.visibility = View.GONE
                         val dialog = ItemNotFoundDialog(this)
                         dialog.onItemClickListener = {
                             finish()
@@ -110,10 +118,12 @@ class RandomJokeActivity : AppCompatActivity() {
                         dialog.show()
                     }
                     Status.SUCCESS -> {
+                        random_joke_progress.visibility = View.GONE
                         resource.data?.let { jokeReceived ->
                             joke = jokeReceived
                         }
                         textJoke.text = joke.value
+                        Picasso.get().load(joke.icon_url).into(imageJoke)
                     }
                 }
             }
@@ -122,5 +132,14 @@ class RandomJokeActivity : AppCompatActivity() {
 
     private fun initViews() {
         textJoke = tv_random_joke
+        imageJoke = image_random_joke
+        btnJoke = btn_random_joke
+        configListener()
+    }
+
+    private fun configListener() {
+        btnJoke.setOnClickListener {
+            searchRandomJoke()
+        }
     }
 }

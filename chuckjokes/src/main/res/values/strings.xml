@@ -12,5 +12,6 @@
     <string name="name_negative_button_remove_favorite_joke_dialog">Cancel</string>
     <string name="message_confirm_remove_favorite_joke">Do you want to remove the joke from your favorites list?</string>
     <string name="home_categories">Home Categories</string>
+    <string name="more_joke">More Chuck!</string>
 
 </resources>
