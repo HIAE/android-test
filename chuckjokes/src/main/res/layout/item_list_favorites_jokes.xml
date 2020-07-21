@@ -13,7 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_list_favorites_joke"
-        android:textAlignment="center">
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark">
 
     </TextView>
     <TextView
