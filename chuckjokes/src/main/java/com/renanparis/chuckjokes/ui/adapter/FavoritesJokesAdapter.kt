@@ -40,7 +40,8 @@ class FavoritesJokesAdapter(private val context: Context,
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var joke: Joke
-        private val textFavoriteJoke = itemView.tv_list_favorites_joke
+        private val textFavoriteJoke by lazy {itemView.tv_list_favorites_joke}
+        private val textCategoryJoke by lazy {itemView.tv_category_list_favorites_joke}
 
         init {
             itemView.setOnClickListener {
@@ -52,6 +53,7 @@ class FavoritesJokesAdapter(private val context: Context,
 
         fun bind(joke: Joke) {
             this.joke = joke
+            textCategoryJoke.text = joke.categories[0]
             textFavoriteJoke.text = joke.value
         }
     }

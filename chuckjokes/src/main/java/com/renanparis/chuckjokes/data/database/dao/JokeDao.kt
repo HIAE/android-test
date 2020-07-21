@@ -10,7 +10,7 @@ import com.renanparis.chuckjokes.data.model.Joke
 @Dao
 interface JokeDao {
 
-    @Query("SELECT * FROM Joke")
+    @Query("SELECT * FROM Joke ORDER BY categories COLLATE NOCASE")
     suspend fun getJokes(): List<Joke>
 
     @Insert(onConflict = REPLACE)

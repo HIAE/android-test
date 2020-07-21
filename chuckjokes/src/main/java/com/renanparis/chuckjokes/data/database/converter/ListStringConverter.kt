@@ -16,6 +16,6 @@ class ListStringConverter {
 
     @TypeConverter
     fun stringTiList(string: String): List<String> {
-        return string.split("\\s*,\\s*").toMutableList()
+        return string.split(",").toMutableList()
     }
 }
