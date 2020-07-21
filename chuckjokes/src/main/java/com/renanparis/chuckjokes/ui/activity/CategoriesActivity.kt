@@ -62,16 +62,16 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
             when (resources.status) {
 
                 Status.SUCCESS -> {
-                    rv_list_category.visibility = View.VISIBLE
+                    categories_joke_progress.visibility = View.GONE
                     resources.data?.let { categories ->
                         adapter.update(categories)
                     }
                 }
                 Status.LOADING -> {
-
+                    categories_joke_progress.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
-                    rv_list_category.visibility = View.GONE
+                    categories_joke_progress.visibility = View.GONE
                     ItemNotFoundDialog(this).show()
                 }
             }

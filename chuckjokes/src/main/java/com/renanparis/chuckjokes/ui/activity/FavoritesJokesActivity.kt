@@ -1,13 +1,14 @@
 package com.renanparis.chuckjokes.ui.activity
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
 import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
 import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
+import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.dialog.RemoveFavoriteJokeDialog
 import com.renanparis.chuckjokes.ui.viewmodel.FavoritesJokesViewModel
 import com.renanparis.chuckjokes.utils.Status
@@ -33,15 +34,21 @@ class FavoritesJokesActivity : AppCompatActivity() {
             when (resources.status) {
 
                 Status.LOADING -> {
-
+                    list_favorites_joke_progress.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
+                    list_favorites_joke_progress.visibility = View.GONE
                     resources.data?.let {jokes->
                     adapter.update(jokes)
                     }
                 }
                 Status.ERROR -> {
-                    Toast.makeText(this, resources.message, Toast.LENGTH_LONG).show()
+                    list_favorites_joke_progress.visibility = View.GONE
+                    val itemNotFoundDialog = ItemNotFoundDialog(this)
+                    itemNotFoundDialog.show()
+                    itemNotFoundDialog.onItemClickListener = {
+                        finish()
+                    }
                 }
             }
         })
