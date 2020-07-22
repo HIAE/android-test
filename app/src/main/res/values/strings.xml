@@ -6,4 +6,6 @@
     <string name="error_message">ops... something went wrong \n try again</string>
     <string name="joke_error_message">your connection is a joke \n try again</string>
     <string name="chuck_norris">Chuck Norris</string>
+    <string name="previous_button">previous</string>
+    <string name="next_button">next</string>
 </resources>

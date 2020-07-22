@@ -30,6 +30,7 @@ class JokeActivity : BaseActivity(
     private fun initViews() {
         tvCategory.text = category
         ivBack.setOnClickListener { onBackPressed() }
+        btnNextJoke.setOnClickListener { viewModel.fetchJoke(category) }
     }
 
     private fun setupObservers() {
