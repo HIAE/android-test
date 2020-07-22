@@ -20,7 +20,8 @@ internal open class ChuckNorrisApplication : Application() {
             modules(
                 ChuckNorrisComponent.apiModule,
                 ChuckNorrisComponent.repositoryModule,
-                ChuckNorrisComponent.useCaseModule
+                ChuckNorrisComponent.useCaseModule,
+                ChuckNorrisComponent.viewModelModule
             )
         }
     }
