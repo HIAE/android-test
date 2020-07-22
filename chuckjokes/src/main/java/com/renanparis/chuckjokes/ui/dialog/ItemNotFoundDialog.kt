@@ -9,7 +9,6 @@ class ItemNotFoundDialog(private val context: Context,
                          private val message: String,
                          var onItemClickListener: () -> Unit = {}) {
 
-
     fun show() {
         AlertDialog.Builder(context)
                 .setMessage(message)
@@ -17,6 +16,5 @@ class ItemNotFoundDialog(private val context: Context,
                     dialog.dismiss()
                     onItemClickListener()
                 }.show()
-
     }
 }

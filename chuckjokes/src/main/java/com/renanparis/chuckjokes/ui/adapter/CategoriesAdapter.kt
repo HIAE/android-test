@@ -33,8 +33,7 @@ class CategoriesAdapter(
         this.categories.addAll(categories)
         notifyDataSetChanged()
     }
-
-
+    
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var category: String

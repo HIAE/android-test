@@ -10,7 +10,6 @@ import java.lang.Exception
 class RandomJokeUseCase(private val repository: JokeRepository) {
 
     fun getRandomJoke(category: String) = liveData(Dispatchers.IO) {
-
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = repository.getRandomJoke(category)))
@@ -20,7 +19,6 @@ class RandomJokeUseCase(private val repository: JokeRepository) {
     }
 
     fun deleteJoke(joke: Joke) = liveData(Dispatchers.IO) {
-
         try {
             emit(Resource.success(data =repository.deleteJoke(joke)))
         }catch (exception: Exception) {
@@ -29,7 +27,6 @@ class RandomJokeUseCase(private val repository: JokeRepository) {
     }
 
     fun saveJoke(joke: Joke) = liveData(Dispatchers.IO) {
-
         try {
             emit(Resource.success(data = repository.saveJoke(joke)))
         }catch (exception: Exception) {

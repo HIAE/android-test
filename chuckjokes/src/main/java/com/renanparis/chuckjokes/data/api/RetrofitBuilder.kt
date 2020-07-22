@@ -10,7 +10,6 @@ object RetrofitBuilder {
     private const val URL = "https://api.chucknorris.io/jokes/"
 
     private fun getClient(): OkHttpClient {
-
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
@@ -19,7 +18,6 @@ object RetrofitBuilder {
     }
 
     private fun getRetrofit(): Retrofit {
-
         return Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
