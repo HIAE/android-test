@@ -20,6 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/ivChuckJokes"
+        android:layout_width="@dimen/margin_64"
+        android:layout_height="@dimen/margin_64"
+        android:layout_marginTop="@dimen/margin_8"
+        android:src="@drawable/chuck_jokes"
+        app:layout_constraintEnd_toEndOf="@+id/lblTitle"
+        app:layout_constraintStart_toStartOf="@+id/lblTitle"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_default"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orangeDark"
+    tools:context=".ui.intro.IntroActivity">
+
+    <TextView
+        android:id="@+id/lblAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/fredoka_one"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_48"
+        app:layout_constraintEnd_toEndOf="@+id/ivIntro"
+        app:layout_constraintStart_toStartOf="@+id/ivIntro"
+        app:layout_constraintTop_toBottomOf="@+id/ivIntro" />
+
+    <TextView
+        android:id="@+id/lblIntroDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:fontFamily="@font/fredoka_one"
+        android:text="@string/intro_description"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_16"
+        app:layout_constraintEnd_toEndOf="@+id/lblAppTitle"
+        app:layout_constraintStart_toStartOf="@+id/lblAppTitle"
+        app:layout_constraintTop_toBottomOf="@+id/lblAppTitle" />
+
+    <ImageView
+        android:id="@+id/ivIntro"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/chuck_jokes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pbIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblAppTitle" />
+
+    <TextView
+        android:id="@+id/lblIntroLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:fontFamily="@font/fredoka_one"
+        android:text="@string/intro_loading_text"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="@+id/pbIntro"
+        app:layout_constraintStart_toStartOf="@+id/pbIntro"
+        app:layout_constraintTop_toBottomOf="@+id/pbIntro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

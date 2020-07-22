@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_chuck_jokes_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.categories.CategoriesActivity">
+        <activity android:name=".ui.intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.categories.CategoriesActivity" />
         <activity android:name=".ui.MainActivity" />
     </application>
 
