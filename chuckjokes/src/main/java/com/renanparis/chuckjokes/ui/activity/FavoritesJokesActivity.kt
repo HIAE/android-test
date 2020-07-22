@@ -39,19 +39,22 @@ class FavoritesJokesActivity : AppCompatActivity() {
                 Status.SUCCESS -> {
                     list_favorites_joke_progress.visibility = View.GONE
                     resources.data?.let { jokes ->
+                        if (jokes.isEmpty()) {
+                          showDialog(this.getString(R.string.message_warning_dialog_no_favorites))
+                        }
                         adapter.update(jokes)
                     }
                 }
                 Status.ERROR -> {
                     list_favorites_joke_progress.visibility = View.GONE
-                    showDialogError()
+                    showDialog(this.getString(R.string.message_warning_dialog_favorites_error))
                 }
             }
         })
     }
 
-    private fun showDialogError() {
-        val itemNotFoundDialog = ItemNotFoundDialog(this)
+    private fun showDialog(message: String) {
+        val itemNotFoundDialog = ItemNotFoundDialog(this, message)
         itemNotFoundDialog.show()
         itemNotFoundDialog.onItemClickListener = {
             finish()

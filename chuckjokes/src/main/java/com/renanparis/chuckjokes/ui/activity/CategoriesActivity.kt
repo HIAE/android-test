@@ -71,10 +71,14 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
                 }
                 Status.ERROR -> {
                     categories_joke_progress.visibility = View.GONE
-                    ItemNotFoundDialog(this).show()
+                    showDialogError()
                 }
             }
         })
+    }
+
+    private fun showDialogError() {
+        ItemNotFoundDialog(this, this.getString(R.string.message_warning_dialog)).show()
     }
 
     private fun configRecyclerView() {

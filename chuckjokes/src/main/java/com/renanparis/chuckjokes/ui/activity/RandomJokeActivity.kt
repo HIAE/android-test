@@ -126,7 +126,8 @@ class RandomJokeActivity : AppCompatActivity() {
     }
 
     private fun showDialogError() {
-        val dialog = ItemNotFoundDialog(this)
+        val dialog = ItemNotFoundDialog(this,
+                this.getString(R.string.message_warning_dialog))
         dialog.onItemClickListener = {
             finish()
         }
