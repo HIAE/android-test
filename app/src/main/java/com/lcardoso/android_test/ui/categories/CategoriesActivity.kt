@@ -2,6 +2,8 @@ package com.lcardoso.android_test.ui.categories
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcardoso.android_test.BaseActivity
 import com.lcardoso.android_test.R
 import com.lcardoso.android_test.data.StateError
@@ -32,8 +34,20 @@ class CategoriesActivity : BaseActivity(
     }
 
     private fun processRequest(state: StateResponse<CategoriesVO>) = when (state) {
-        is StateSuccess<CategoriesVO> -> textView.text = state.data.categories.size.toString()
+        is StateSuccess<CategoriesVO> -> setupRecyclerView(state.data.categories)
         is StateError -> Toast.makeText(this, state.e.message, Toast.LENGTH_SHORT).show()
         is StateLoading -> Toast.makeText(this, "Carregando...", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupRecyclerView(data: List<String>) {
+        with(rvCategories) {
+            layoutManager =
+                LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = CategoriesAdapter(data) { category ->
+//                startActivity<MoviesActivity>("GENRE_ID" to genre.id, "GENRE_NAME" to genre.name)
+                Toast.makeText(this.context, category, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
