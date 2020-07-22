@@ -4,4 +4,6 @@
     <string name="intro_loading_text">fetching jokes to destroy sadness...</string>
     <string name="intro_description">for you die laughing</string>
     <string name="error_message">ops... something went wrong \n try again</string>
+    <string name="joke_error_message">your connection is a joke \n try again</string>
+    <string name="chuck_norris">Chuck Norris</string>
 </resources>

@@ -4,6 +4,7 @@ import com.lcardoso.android_test.api.ChuckNorrisAPI
 import com.lcardoso.android_test.api.doRequest
 import com.lcardoso.android_test.data.model.CategoriesVO
 import com.lcardoso.android_test.data.model.JokeResponse
+import com.lcardoso.android_test.data.model.JokeVO
 import com.lcardoso.android_test.util.toVO
 import io.reactivex.Single
 
@@ -15,7 +16,13 @@ class JokesRepositoryImp(
         api.fetchCategories().map { categories -> categories.toVO() }
     }
 
-    fun fetchJokes(category: String): Single<JokeResponse> = doRequest {
-        api.fetchJokes(category)
+    fun fetchJokes(category: String): Single<JokeVO> = doRequest {
+        api.fetchJokes(category).map { jokeResponse ->
+            JokeVO(
+                category = jokeResponse.categories?.get(0),
+                id = jokeResponse.id,
+                joke = jokeResponse.value
+            )
+        }
     }
 }

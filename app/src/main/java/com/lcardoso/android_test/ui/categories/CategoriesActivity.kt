@@ -10,9 +10,11 @@ import com.lcardoso.android_test.data.StateLoading
 import com.lcardoso.android_test.data.StateResponse
 import com.lcardoso.android_test.data.StateSuccess
 import com.lcardoso.android_test.data.model.CategoriesVO
+import com.lcardoso.android_test.ui.joke.JokeActivity
 import com.lcardoso.android_test.util.changeVisibility
 import com.lcardoso.android_test.util.nomNullObserve
 import kotlinx.android.synthetic.main.activity_categories.*
+import org.jetbrains.anko.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoriesActivity : BaseActivity(
@@ -46,7 +48,7 @@ class CategoriesActivity : BaseActivity(
                 LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = CategoriesAdapter(data) { category ->
-                Toast.makeText(this.context, category, Toast.LENGTH_LONG).show()
+                startActivity<JokeActivity>(JokeActivity.CATEGORY to category)
             }
             this.changeVisibility(true)
         }

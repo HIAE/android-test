@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_chuck_jokes_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.joke.JokeActivity"></activity>
         <activity android:name=".ui.intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.categories.CategoriesActivity" />
-        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>
