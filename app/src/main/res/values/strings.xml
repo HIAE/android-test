@@ -3,4 +3,5 @@
     <string name="categories">categories</string>
     <string name="intro_loading_text">fetching jokes to destroy sadness...</string>
     <string name="intro_description">for you die laughing</string>
+    <string name="error_message">ops... something went wrong \n try again</string>
 </resources>

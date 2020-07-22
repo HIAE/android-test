@@ -1,5 +1,6 @@
 package com.lcardoso.android_test.util
 
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -13,3 +14,7 @@ fun <T> LiveData<T>.nomNullObserve(owner: LifecycleOwner, observer: (data: T) ->
 
 fun List<String>.toVO() =
     CategoriesVO(categories = this)
+
+fun View.changeVisibility(isVisible: Boolean) {
+    visibility = if (isVisible) View.VISIBLE else View.GONE
+}
