@@ -18,7 +18,9 @@ internal open class ChuckNorrisApplication : Application() {
         startKoin {
             androidContext(this@ChuckNorrisApplication)
             modules(
-                ChuckNorrisComponent.apiModule
+                ChuckNorrisComponent.apiModule,
+                ChuckNorrisComponent.repositoryModule,
+                ChuckNorrisComponent.useCaseModule
             )
         }
     }
