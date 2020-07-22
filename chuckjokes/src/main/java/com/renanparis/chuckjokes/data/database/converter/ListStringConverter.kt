@@ -7,11 +7,10 @@ class ListStringConverter {
     @TypeConverter
     fun listToString(list: List<String>): String {
         var string = ""
-
         for(value in list) {
             string += "$value,"
         }
-        return string
+        return string.substring(0, string.length -1)
     }
 
     @TypeConverter
