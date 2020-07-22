@@ -11,6 +11,7 @@
         android:id="@+id/image_chuck"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:contentDescription="@string/image_splash_screen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

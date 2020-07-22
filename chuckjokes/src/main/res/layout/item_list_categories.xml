@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_list_category"
-    android:layout_margin="4dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="10dp"
     android:backgroundTint="@color/colorAccent">
 
@@ -24,9 +24,8 @@
             android:textSize="24sp"
             android:padding="4dp"
             tools:text="Exemplo"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:textAlignment="center"
-            android:layout_marginTop="8dp"
             android:textStyle="bold"
             android:textColor="@android:color/white">
         </TextView>
