@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
-import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
+import com.renanparis.chuckjokes.ui.activity.extensions.validateRemovedFavorite
 import com.renanparis.chuckjokes.ui.adapter.FavoritesJokesAdapter
 import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.dialog.RemoveFavoriteJokeDialog
@@ -29,7 +29,7 @@ class FavoritesJokesActivity : AppCompatActivity() {
     }
 
     private fun getFavoritesJokes() {
-        viewModel.getFavoritesJokes().observe(this, Observer {resources ->
+        viewModel.getFavoritesJokes().observe(this, Observer { resources ->
 
             when (resources.status) {
 
@@ -38,20 +38,24 @@ class FavoritesJokesActivity : AppCompatActivity() {
                 }
                 Status.SUCCESS -> {
                     list_favorites_joke_progress.visibility = View.GONE
-                    resources.data?.let {jokes->
-                    adapter.update(jokes)
+                    resources.data?.let { jokes ->
+                        adapter.update(jokes)
                     }
                 }
                 Status.ERROR -> {
                     list_favorites_joke_progress.visibility = View.GONE
-                    val itemNotFoundDialog = ItemNotFoundDialog(this)
-                    itemNotFoundDialog.show()
-                    itemNotFoundDialog.onItemClickListener = {
-                        finish()
-                    }
+                    showDialogError()
                 }
             }
         })
+    }
+
+    private fun showDialogError() {
+        val itemNotFoundDialog = ItemNotFoundDialog(this)
+        itemNotFoundDialog.show()
+        itemNotFoundDialog.onItemClickListener = {
+            finish()
+        }
     }
 
     private fun configRecyclerView() {
@@ -61,22 +65,22 @@ class FavoritesJokesActivity : AppCompatActivity() {
 
     private fun configAdapter() {
         val dialog = RemoveFavoriteJokeDialog(this)
-        adapter.onItemClickListener = {joke->
-            dialog.show()
-            dialog.onItemClickListener = {
-                removeFavoriteJoke(joke)
-                adapter.removeFavoriteJoke(joke)
-            }
+        adapter.onItemClickListener = { joke ->
+            showDialogRemoveFavariteJoke(dialog, joke)
+        }
+    }
+
+    private fun showDialogRemoveFavariteJoke(dialog: RemoveFavoriteJokeDialog, joke: Joke) {
+        dialog.show()
+        dialog.onItemClickListener = {
+            removeFavoriteJoke(joke)
+            adapter.removeFavoriteJoke(joke)
         }
     }
 
     private fun removeFavoriteJoke(joke: Joke) {
-        viewModel.removeFavoriteJoke(joke).observe(this, Observer {resources ->
-            if (resources.status == Status.SUCCESS) {
-                showMessage(getString(R.string.message_remove_favorite))
-            } else if (resources.status == Status.ERROR) {
-                showMessage(resources.message.toString())
-            }
+        viewModel.removeFavoriteJoke(joke).observe(this, Observer { resources ->
+            validateRemovedFavorite(resources.status)
         })
     }
 }

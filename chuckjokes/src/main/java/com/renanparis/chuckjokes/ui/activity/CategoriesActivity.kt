@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.GridLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -79,7 +78,8 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
     }
 
     private fun configRecyclerView() {
-        rv_list_category.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        rv_list_category.layoutManager = GridLayoutManager(this, COUNT,
+                GridLayoutManager.VERTICAL, false)
         rv_list_category.adapter = adapter
         configAdapter()
     }
@@ -104,5 +104,6 @@ class CategoriesActivity : AppCompatActivity(), InternetConnectivityListener {
 
     companion object {
         const val KEY_CATEGORY_JOKE = "category"
+        const val COUNT = 2
     }
 }

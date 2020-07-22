@@ -13,7 +13,8 @@ import androidx.lifecycle.Observer
 import com.renanparis.chuckjokes.R
 import com.renanparis.chuckjokes.data.model.Joke
 import com.renanparis.chuckjokes.ui.activity.CategoriesActivity.Companion.KEY_CATEGORY_JOKE
-import com.renanparis.chuckjokes.ui.activity.extensions.showMessage
+import com.renanparis.chuckjokes.ui.activity.extensions.validateRemovedFavorite
+import com.renanparis.chuckjokes.ui.activity.extensions.validateSavedFavorite
 import com.renanparis.chuckjokes.ui.dialog.ItemNotFoundDialog
 import com.renanparis.chuckjokes.ui.viewmodel.RandomJokeViewModel
 import com.renanparis.chuckjokes.utils.Status
@@ -46,59 +47,57 @@ class RandomJokeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.favorite_joke_white -> {
                 joke.favorite = true
                 saveFavoriteJoke()
                 invalidateOptionsMenu()
             }
-
             R.id.favorite_joke_board -> {
                 joke.favorite = false
                 deleteFavoriteJoke()
                 invalidateOptionsMenu()
             }
-
             R.id.list_favorites_jokes -> {
-                startActivity(Intent(this, FavoritesJokesActivity::class.java))
+                goToFavoritesJoke()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun goToFavoritesJoke() {
+        startActivity(Intent(this, FavoritesJokesActivity::class.java))
+    }
+
     private fun deleteFavoriteJoke() {
         viewModel.deleteJoke(joke).observe(this, Observer { resources ->
-            if (resources.status == Status.SUCCESS) {
-                showMessage(getString(R.string.message_remove_favorite))
-            } else if (resources.status == Status.ERROR) {
-                showMessage( resources.message.toString())
-            }
+            validateRemovedFavorite(resources.status)
         })
     }
 
     private fun saveFavoriteJoke() {
         viewModel.saveJoke(joke).observe(this, Observer { resources ->
-            if (resources.status == Status.SUCCESS) {
-                showMessage(getString(R.string.message_add_favorite))
-            } else if (resources.status == Status.ERROR) {
-                showMessage(resources.message.toString())
-            }
+            validateSavedFavorite(resources.status)
         })
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-
         if (::joke.isInitialized && joke.favorite) {
-            menu?.findItem(R.id.favorite_joke_board)?.isVisible = true
-            menu?.findItem(R.id.favorite_joke_white)?.isVisible = false
+            changeColorToItemSaved(menu)
         } else {
-            menu?.findItem(R.id.favorite_joke_board)?.isVisible = false
-            menu?.findItem(R.id.favorite_joke_white)?.isVisible = true
+            changeColorToItemNotSaved(menu)
         }
-
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    private fun changeColorToItemNotSaved(menu: Menu?) {
+        menu?.findItem(R.id.favorite_joke_board)?.isVisible = false
+        menu?.findItem(R.id.favorite_joke_white)?.isVisible = true
+    }
+
+    private fun changeColorToItemSaved(menu: Menu?) {
+        menu?.findItem(R.id.favorite_joke_board)?.isVisible = true
+        menu?.findItem(R.id.favorite_joke_white)?.isVisible = false
     }
 
     private fun searchRandomJoke() {
@@ -111,25 +110,33 @@ class RandomJokeActivity : AppCompatActivity() {
                     }
                     Status.ERROR -> {
                         random_joke_progress.visibility = View.GONE
-                        val dialog = ItemNotFoundDialog(this)
-                        dialog.onItemClickListener = {
-                            finish()
-                        }
-                        dialog.show()
+                        showDialogError()
                     }
                     Status.SUCCESS -> {
                         random_joke_progress.visibility = View.GONE
                         resource.data?.let { jokeReceived ->
                             joke = jokeReceived
                         }
-                        textJoke.text = joke.value
-                        Picasso.get().load(joke.icon_url).into(imageJoke)
-                        invalidateOptionsMenu()
+                        setViews()
 
                     }
                 }
             }
         })
+    }
+
+    private fun showDialogError() {
+        val dialog = ItemNotFoundDialog(this)
+        dialog.onItemClickListener = {
+            finish()
+        }
+        dialog.show()
+    }
+
+    private fun setViews() {
+        Picasso.get().load(joke.icon_url).into(imageJoke)
+        textJoke.text = joke.value
+        invalidateOptionsMenu()
     }
 
     private fun initViews() {
