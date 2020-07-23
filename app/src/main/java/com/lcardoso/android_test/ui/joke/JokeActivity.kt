@@ -1,6 +1,7 @@
 package com.lcardoso.android_test.ui.joke
 
 import android.os.Bundle
+import android.util.Log
 import com.lcardoso.android_test.BaseActivity
 import com.lcardoso.android_test.R
 import com.lcardoso.android_test.data.StateError
@@ -19,7 +20,9 @@ class JokeActivity : BaseActivity(
 
     private val viewModel: JokeViewModel by viewModel()
     private val category: String by lazy { intent.getStringExtra(CATEGORY) }
+    private var currentJokeId: String? = null
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
@@ -30,11 +33,26 @@ class JokeActivity : BaseActivity(
     private fun initViews() {
         tvCategory.text = category
         ivBack.setOnClickListener { onBackPressed() }
-        btnNextJoke.setOnClickListener { viewModel.fetchJoke(category) }
+        btnNextJoke.setOnClickListener { nextJoke() }
     }
 
+    @ExperimentalStdlibApi
     private fun setupObservers() {
         viewModel.jokeLiveData.nomNullObserve(this) { state ->
+            processRequest(state)
+        }
+
+        viewModel.hasPreviousJokeLiveData.nomNullObserve(this) { hasPreviousJoke ->
+            btnPreviousJoke.run {
+                changeVisibility(hasPreviousJoke)
+                if (hasPreviousJoke) {
+                    val previousJoke = viewModel.recentJokes.last()
+                    setOnClickListener { viewModel.fetchPreviousJoke(previousJoke) }
+                }
+            }
+        }
+
+        viewModel.previousJokeLiveData.nomNullObserve(this) { state ->
             processRequest(state)
         }
     }
@@ -46,7 +64,9 @@ class JokeActivity : BaseActivity(
     }
 
     private fun setupJoke(joke: JokeVO) {
+        currentJokeId = joke.id
         pbJoke.changeVisibility(false)
+        errorJokeView.changeVisibility(false)
         tvJoke.run {
             changeVisibility(true)
             text = joke.joke
@@ -64,6 +84,11 @@ class JokeActivity : BaseActivity(
         pbJoke.changeVisibility(true)
         errorJokeView.changeVisibility(false)
         tvJoke.changeVisibility(false)
+    }
+
+    private fun nextJoke() {
+        currentJokeId?.let { viewModel.setRecentJokes(it) }
+        viewModel.fetchJoke(category)
     }
 
     companion object {

@@ -19,7 +19,17 @@ class JokesRepositoryImp(
     fun fetchJokes(category: String): Single<JokeVO> = doRequest {
         api.fetchJokes(category).map { jokeResponse ->
             JokeVO(
-                category = jokeResponse.categories?.get(0),
+                category = jokeResponse.categories?.first(),
+                id = jokeResponse.id,
+                joke = jokeResponse.value
+            )
+        }
+    }
+
+    fun fetchPreviousJoke(jokeId: String): Single<JokeVO> = doRequest {
+        api.fetchPreviousJokes(jokeId).map { jokeResponse ->
+            JokeVO(
+                category = jokeResponse.categories?.first(),
                 id = jokeResponse.id,
                 joke = jokeResponse.value
             )

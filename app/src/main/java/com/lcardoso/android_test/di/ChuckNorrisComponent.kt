@@ -7,6 +7,7 @@ import com.lcardoso.android_test.ui.categories.CategoriesViewModel
 import com.lcardoso.android_test.ui.joke.JokeViewModel
 import com.lcardoso.android_test.usecase.FetchCategoriesUseCase
 import com.lcardoso.android_test.usecase.FetchJokesUseCase
+import com.lcardoso.android_test.usecase.FetchPreviousJokeUseCase
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -25,10 +26,11 @@ object ChuckNorrisComponent {
     val useCaseModule = module {
         single { FetchCategoriesUseCase(get()) }
         single { FetchJokesUseCase(get()) }
+        single { FetchPreviousJokeUseCase(get()) }
     }
 
     val viewModelModule = module {
         viewModel { CategoriesViewModel(get()) }
-        viewModel { JokeViewModel(get()) }
+        viewModel { JokeViewModel(get(), get()) }
     }
 }
