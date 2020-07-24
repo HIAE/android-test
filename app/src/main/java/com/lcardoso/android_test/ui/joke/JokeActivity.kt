@@ -1,7 +1,6 @@
 package com.lcardoso.android_test.ui.joke
 
 import android.os.Bundle
-import android.util.Log
 import com.lcardoso.android_test.BaseActivity
 import com.lcardoso.android_test.R
 import com.lcardoso.android_test.data.StateError
@@ -32,7 +31,7 @@ class JokeActivity : BaseActivity(
 
     private fun initViews() {
         tvCategory.text = category
-        ivBack.setOnClickListener { onBackPressed() }
+        ivBack.setOnClickListener { finish() }
         btnNextJoke.setOnClickListener { nextJoke() }
     }
 
@@ -89,6 +88,11 @@ class JokeActivity : BaseActivity(
     private fun nextJoke() {
         currentJokeId?.let { viewModel.setRecentJokes(it) }
         viewModel.fetchJoke(category)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     companion object {

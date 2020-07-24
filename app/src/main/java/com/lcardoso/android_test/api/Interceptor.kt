@@ -1,5 +1,6 @@
 package com.lcardoso.android_test.api
 
+import io.reactivex.Completable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,4 +24,7 @@ private fun <T> Single<T>.requestIt(
 fun ui(): Scheduler = AndroidSchedulers.mainThread()
 
 fun <T> Single<T>.defaultSchedulers(): Single<T> =
+    subscribeOn(Schedulers.io()).observeOn(ui())
+
+fun Completable.defaultSchedulers(): Completable =
     subscribeOn(Schedulers.io()).observeOn(ui())
