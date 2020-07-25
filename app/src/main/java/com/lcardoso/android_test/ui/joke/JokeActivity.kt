@@ -12,6 +12,7 @@ import com.lcardoso.android_test.util.changeVisibility
 import com.lcardoso.android_test.util.nomNullObserve
 import com.lcardoso.android_test.util.toEntity
 import kotlinx.android.synthetic.main.activity_joke.*
+import kotlinx.android.synthetic.main.view_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class JokeActivity : BaseActivity(
@@ -32,10 +33,14 @@ class JokeActivity : BaseActivity(
     }
 
     private fun initViews() {
-        tvCategory.text = category
-        ivBack.setOnClickListener { finish() }
+        setupToolbar()
         btnNextJoke.setOnClickListener { nextJoke() }
         setupFavoriteToggle()
+    }
+
+    private fun setupToolbar() {
+        tvHeading.text = category
+        ivBack.setOnClickListener { finish() }
     }
 
     @ExperimentalStdlibApi

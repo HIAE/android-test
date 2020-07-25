@@ -10,6 +10,7 @@ import com.lcardoso.android_test.data.StateLoading
 import com.lcardoso.android_test.data.StateResponse
 import com.lcardoso.android_test.data.StateSuccess
 import com.lcardoso.android_test.data.model.CategoriesVO
+import com.lcardoso.android_test.ui.favorites.FavoritesActivity
 import com.lcardoso.android_test.ui.joke.JokeActivity
 import com.lcardoso.android_test.util.changeVisibility
 import com.lcardoso.android_test.util.nomNullObserve
@@ -25,6 +26,7 @@ class CategoriesActivity : BaseActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupListener()
         setupObservers()
         viewModel.fetchCategories()
     }
@@ -33,6 +35,10 @@ class CategoriesActivity : BaseActivity(
         viewModel.categoriesLiveData.nomNullObserve(this) { state ->
             processRequest(state)
         }
+    }
+
+    private fun setupListener() {
+        btnFavorites.setOnClickListener { startActivity<FavoritesActivity>() }
     }
 
     private fun processRequest(state: StateResponse<CategoriesVO>) = when (state) {
