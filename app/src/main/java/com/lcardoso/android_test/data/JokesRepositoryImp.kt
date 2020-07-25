@@ -42,5 +42,7 @@ class JokesRepositoryImp(
 
     fun fetchFavoritesJokes() = jokeDAO.fetchFavoriteJokes()
 
+    fun isFavoriteJoke(id: String) = jokeDAO.isFavoriteJoke(id)
+
     fun removeFavoriteJoke(joke: JokeEntity) = jokeDAO.removeFavoriteJoke(joke)
 }

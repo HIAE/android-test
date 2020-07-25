@@ -11,6 +11,7 @@
     <dimen name="dimen_default">0dp</dimen>
     <dimen name="dimen_5">5dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
 
     <dimen name="button_width">120dp</dimen>
 
@@ -18,6 +19,7 @@
     <dimen name="joke_card">300dp</dimen>
     <dimen name="joke_text">250dp</dimen>
 
+    <dimen name="font_14">14sp</dimen>
     <dimen name="font_16">16sp</dimen>
     <dimen name="font_32">32sp</dimen>
     <dimen name="font_48">48sp</dimen>

@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Chuck Jokes!</string>
     <string name="categories">categories</string>
-    <string name="intro_loading_text">fetching jokes to destroy sadness...</string>
+    <string name="intro_loading_text">fetching jokes to destroy sadness…</string>
     <string name="intro_description">for you die laughing</string>
-    <string name="error_message">ops... something went wrong \n try again</string>
+    <string name="error_message">ops… something went wrong \n try again</string>
     <string name="joke_error_message">your connection is a joke \n try again</string>
     <string name="chuck_norris">Chuck Norris</string>
     <string name="previous_button">previous</string>
     <string name="next_button">next</string>
+    <string name="tap_to_favorite_joke">click on the star to save or remove this joke in your favorites</string>
 </resources>

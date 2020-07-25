@@ -8,13 +8,16 @@ import com.lcardoso.android_test.data.StateError
 import com.lcardoso.android_test.data.StateLoading
 import com.lcardoso.android_test.data.StateResponse
 import com.lcardoso.android_test.data.StateSuccess
+import com.lcardoso.android_test.data.database.JokeEntity
 import com.lcardoso.android_test.data.model.JokeVO
-import com.lcardoso.android_test.usecase.FetchJokesUseCase
-import com.lcardoso.android_test.usecase.FetchPreviousJokeUseCase
+import com.lcardoso.android_test.usecase.*
 
 class JokeViewModel(
     private val fetchJokesUseCase: FetchJokesUseCase,
-    private val fetchPreviousJokeUseCase: FetchPreviousJokeUseCase
+    private val fetchPreviousJokeUseCase: FetchPreviousJokeUseCase,
+    private val addFavoriteJokeUseCase: AddFavoriteJokeUseCase,
+    private val removeFavoriteJokeUseCase: RemoveFavoriteJokeUseCase,
+    private val isFavoriteJokeUseCase: IsFavoriteJokeUseCase
 ) : BaseViewModel() {
 
     val jokeLiveData: LiveData<StateResponse<JokeVO>> get() = _jokeLiveData
@@ -25,6 +28,9 @@ class JokeViewModel(
 
     val hasPreviousJokeLiveData: LiveData<Boolean> get() = _hasPreviousJokeLiveData
     private val _hasPreviousJokeLiveData = MutableLiveData<Boolean>()
+
+    val isFavoriteJokeLiveData: LiveData<Boolean> get() = _isFavoriteJokeLiveData
+    private val _isFavoriteJokeLiveData = MutableLiveData<Boolean>()
 
     var recentJokes: MutableList<String> = mutableListOf()
 
@@ -58,5 +64,46 @@ class JokeViewModel(
     fun setRecentJokes(jokeId: String) {
         recentJokes.add(jokeId)
         _hasPreviousJokeLiveData.value = recentJokes.isNotEmpty()
+    }
+
+    fun isFavoriteJoke(id: String) {
+        isFavoriteJokeUseCase.execute(IsFavoriteJokeUseCase.Param(id = id)).subscribe(
+            {
+                _isFavoriteJokeLiveData.value = true
+            },
+            {
+                _isFavoriteJokeLiveData.value = false
+            }
+        ).let { disposables.add(it) }
+    }
+
+    fun addFavoriteJoke(joke: JokeEntity) {
+        addFavoriteJokeUseCase.execute(
+            AddFavoriteJokeUseCase.Param(
+                id = joke.id,
+                category = joke.category,
+                joke = joke.joke
+
+            )
+        ).subscribe(
+            {}, { e ->
+                Log.d("lero", e.message)
+            }
+        ).let { disposables.add(it) }
+    }
+
+    fun removeFavoriteJoke(joke: JokeEntity) {
+        removeFavoriteJokeUseCase.execute(
+            RemoveFavoriteJokeUseCase.Param(
+                id = joke.id,
+                category = joke.category,
+                joke = joke.joke
+
+            )
+        ).subscribe(
+            {}, { e ->
+                Log.d("lero", e.message)
+            }
+        ).let { disposables.add(it) }
     }
 }

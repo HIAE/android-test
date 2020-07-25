@@ -13,6 +13,9 @@ interface JokeDAO {
     @Query("SELECT * FROM jokes")
     fun fetchFavoriteJokes(): Single<List<JokeEntity>>
 
+    @Query("SELECT * FROM jokes WHERE id= :id")
+    fun isFavoriteJoke(id: String): Single<JokeEntity>
+
     @Delete
     fun removeFavoriteJoke(joke: JokeEntity): Completable
 }

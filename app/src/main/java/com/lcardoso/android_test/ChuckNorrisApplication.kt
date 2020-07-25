@@ -19,6 +19,7 @@ internal open class ChuckNorrisApplication : Application() {
             androidContext(this@ChuckNorrisApplication)
             modules(
                 ChuckNorrisComponent.apiModule,
+                ChuckNorrisComponent.databaseModule,
                 ChuckNorrisComponent.repositoryModule,
                 ChuckNorrisComponent.useCaseModule,
                 ChuckNorrisComponent.viewModelModule

@@ -10,6 +10,7 @@ import com.lcardoso.android_test.data.StateSuccess
 import com.lcardoso.android_test.data.model.JokeVO
 import com.lcardoso.android_test.util.changeVisibility
 import com.lcardoso.android_test.util.nomNullObserve
+import com.lcardoso.android_test.util.toEntity
 import kotlinx.android.synthetic.main.activity_joke.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +21,7 @@ class JokeActivity : BaseActivity(
     private val viewModel: JokeViewModel by viewModel()
     private val category: String by lazy { intent.getStringExtra(CATEGORY) }
     private var currentJokeId: String? = null
+    private lateinit var currentJoke: JokeVO
 
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,7 @@ class JokeActivity : BaseActivity(
         tvCategory.text = category
         ivBack.setOnClickListener { finish() }
         btnNextJoke.setOnClickListener { nextJoke() }
+        setupFavoriteToggle()
     }
 
     @ExperimentalStdlibApi
@@ -54,6 +57,10 @@ class JokeActivity : BaseActivity(
         viewModel.previousJokeLiveData.nomNullObserve(this) { state ->
             processRequest(state)
         }
+
+        viewModel.isFavoriteJokeLiveData.nomNullObserve(this) { isFavoriteJoke ->
+            toggleFavorite.isChecked = isFavoriteJoke
+        }
     }
 
     private fun processRequest(state: StateResponse<JokeVO>) = when (state) {
@@ -63,7 +70,11 @@ class JokeActivity : BaseActivity(
     }
 
     private fun setupJoke(joke: JokeVO) {
-        currentJokeId = joke.id
+        currentJoke = joke
+        joke.id?.let {
+            currentJokeId = it
+            viewModel.isFavoriteJoke(it)
+        }
         pbJoke.changeVisibility(false)
         errorJokeView.changeVisibility(false)
         tvJoke.run {
@@ -88,6 +99,18 @@ class JokeActivity : BaseActivity(
     private fun nextJoke() {
         currentJokeId?.let { viewModel.setRecentJokes(it) }
         viewModel.fetchJoke(category)
+    }
+
+    private fun setupFavoriteToggle() {
+        toggleFavorite.run {
+            setOnClickListener {
+                if (isChecked) {
+                    viewModel.addFavoriteJoke(currentJoke.toEntity())
+                } else {
+                    viewModel.removeFavoriteJoke(currentJoke.toEntity())
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
