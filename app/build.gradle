@@ -41,6 +41,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "io.mockk:mockk:1.8.13"
 
     def view_model_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$view_model_version"

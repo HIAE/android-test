@@ -7,12 +7,12 @@
     <application
         android:name=".ChuckNorrisApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_chuck_jokes"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_chuck_jokes_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.favorites.FavoritesActivity"></activity>
+        <activity android:name=".ui.favorites.FavoritesActivity" />
         <activity android:name=".ui.joke.JokeActivity" />
         <activity android:name=".ui.intro.IntroActivity">
             <intent-filter>
