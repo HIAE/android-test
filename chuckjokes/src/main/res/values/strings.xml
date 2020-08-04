@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Chuck Jokes</string>
+    <string name="favorite_joke">Favorite Joke</string>
+    <string name="joke_checked">Joke on the Favorite List</string>
+    <string name="favorites_jokes">List of Favorites Jokes</string>
+    <string name="message_add_favorite">Your favorite joke has been added</string>
+    <string name="message_remove_favorite">Your favorite joke has been removed</string>
+    <string name="message_remove_favorite_error">Unable to remove the joke from favorites, please try later</string>
+    <string name="message_add_favorite_error">Unable to save the joke as a favorites, please try later</string>
+    <string name="message_warning_dialog">Unable to load the information. Please check your connection or try later.</string>
+    <string name="message_warning_dialog_no_favorites">There are no jokes saved as favorites</string>
+    <string name="message_warning_dialog_favorites_error">There was an error fetching your favorite jokes</string>
+    <string name="name_button_warning_dialog">Ok</string>
+    <string name="title_remove_favorite_joke_dialog">Favorite Joke</string>
+    <string name="name_positive_button_remove_favorite_joke_dialog">Confirm</string>
+    <string name="name_negative_button_remove_favorite_joke_dialog">Cancel</string>
+    <string name="message_confirm_remove_favorite_joke">Do you want to remove the joke from your favorites list?</string>
+    <string name="more_joke">More Chuck!</string>
+    <string name="image_splash_screen">Image of the illustrious Chuck Norris</string>
+    <string name="icon_random_Joke">Icon Chuck Norris</string>
+</resources>
