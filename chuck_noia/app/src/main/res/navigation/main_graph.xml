@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph.xml"
+    app:startDestination="@id/categoriesFragment">
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="br.com.antoniocgrande.chucknoia.presentation.fragments.CategoriesFragment"
+        android:label="@string/label_categories"
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_categoriesFragment_to_jokeFragment"
+            app:destination="@id/jokeFragment" />
+        <argument
+            android:name="CATEGORY"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/jokeFragment"
+        android:name="br.com.antoniocgrande.chucknoia.presentation.fragments.JokeFragment"
+        android:label="@string/label_jokes"
+        tools:layout="@layout/fragment_joke" />
+
+</navigation>
