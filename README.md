@@ -37,7 +37,7 @@ Você não tem que ser o mestre dos designers, MAS queremos devs que também sai
 - Injeção de dependência com Hilt
 - Courotines ou RXJava2 (E vamos ficar super empolgados e curiosos em entender o motivo da sua escolha aqui)
 - AndroidX
-- Clean Architecture (MVP) ou MVVM
+- VIPER ou MVVM
 
 #### Como você será avaliado:
 
