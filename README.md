@@ -1,3 +1,23 @@
+### Olá!
+
+Primeiro quero agradacer pela oportunidade!
+
+Fiz o App "Chuck Jokes" com a opção de seleção por categoria ou uma frase aleatória sem categoria.
+
+**Usei:**
+
+Retrofit2 pra chamada da api
+VIPER (Acredito que não segui ela a risca mas tentei, aprendi agora para aplicar nesse teste)
+Coroutines (Apesar de não dominar, eu já tinha usado para outro projeto então foi mais tranquilo de usar)
+
+Tive dificuldade com o Hilt, esse eu também peguei para aprender agora com o teste e estava tendo alguns problemas, e como eu tinha pouco tempo resolvi "abortar" o uso, implementei mas acabei tirando a estrutura.
+
+Esse teste veio em uma semana muito corrida pra mim então só consegui pegar pra fazer nos últimos dias, mesmo assim achei que era válido Tentar me dedicar nele.
+
+Feedback positivo ou negativo é bem vindo! e se for negativo por gentileza comentei para que eu consiga melhorar, Obrigado!! :)
+
+_____________________________________________________________________________________________________________________________________________
+
 ### Seja muuuuuito bem vindx ao teste de Android do Albert Einstein!
 
 Primeiro, **VALEU** por separar seu tempo para fazer este pequeno teste.<br/>
