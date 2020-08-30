@@ -39,16 +39,15 @@ class CategoriasRepository {
                         val _response = response.body()
                         val categorias = mutableListOf<String>()
 
-                        if (_response != null && _response.isNotEmpty()){
-
+                        if (_response != null && _response.isNotEmpty())
                             for (categoria in _response)  categorias.add(categoria)
-                            showCategories.postValue(categorias)
-                        }
+
                         Coroutines.io {
                             delay(1_000)
                             showProgressBar.postValue(false)
                             showMessageNoInternet.postValue(Event(false))
                             showMessageServerError.postValue(Event(false))
+                            showCategories.postValue(categorias)
                         }
                     }
                     else -> {

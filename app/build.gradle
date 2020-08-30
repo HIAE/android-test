@@ -62,14 +62,17 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    //Anko
-    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
 
     //NavigationView
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
+
+    //Anko
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
     //Testes
     testImplementation 'junit:junit:4.12'

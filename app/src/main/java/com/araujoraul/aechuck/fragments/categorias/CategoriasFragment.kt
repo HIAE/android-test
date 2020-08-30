@@ -14,6 +14,7 @@ import com.araujoraul.aechuck.MainApplication
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseFragment
 import com.araujoraul.aechuck.fragments.categorias.adapter.CategoriasAdapter
+import com.araujoraul.aechuck.fragments.piada.PiadaDialogFragment
 import com.araujoraul.aechuck.utils.hide
 import com.araujoraul.aechuck.utils.show
 import com.araujoraul.aechuck.utils.toast
@@ -23,6 +24,7 @@ class CategoriasFragment : BaseFragment() {
 
     private lateinit var viewModel: CategoriasViewModel
     private lateinit var recyclerView: RecyclerView
+    private val piadaDialogFragment = PiadaDialogFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_categorias, container, false)
@@ -61,7 +63,12 @@ class CategoriasFragment : BaseFragment() {
                         categories.addAll(response)
 
                         recyclerView.adapter = CategoriasAdapter(categories) { categoria: String ->
-                            Toast.makeText(context, "Detalhe not implemented yet", Toast.LENGTH_SHORT).show()
+
+                            val args = Bundle()
+                            args.putString("category", categoria)
+                            piadaDialogFragment.arguments = args
+                            piadaDialogFragment.show(requireActivity().supportFragmentManager, "tag")
+
                         }
                     }
             })
