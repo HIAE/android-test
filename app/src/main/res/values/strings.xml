@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AEchuck</string>
+    <string name="nav_header_title">Chuck Norris Jokes</string>
+    <string name="categorias_label">Categorias</string>
 </resources>
