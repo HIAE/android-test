@@ -14,6 +14,6 @@ interface ChuckService {
     fun getRandomChuckJokesByCategory() : Call<List<ChuckJokes>>
 
     @GET(ConstantsUrls.GET_LIST_AVAILABLE_CATEGORIES)
-    fun getListCategories() : Call<List<String>>
+    fun getCategoriesList() : Call<List<String>>
 
 }
