@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +13,7 @@ import com.araujoraul.aechuck.fragments.BaseDialogFragment
 import com.araujoraul.aechuck.utils.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_dialog_joke.*
+import kotlinx.coroutines.delay
 
 class JokeDialogFragment : BaseDialogFragment() {
 
@@ -26,6 +24,9 @@ class JokeDialogFragment : BaseDialogFragment() {
     private lateinit var joke: TextView
     private lateinit var btnRandomJoke: Button
     private lateinit var favorite: ImageButton
+    private lateinit var progress: ProgressBar
+    private lateinit var imgNoInternet: ImageView
+    private lateinit var imgServerError: ImageView
     private var getTitleCategory = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,9 @@ class JokeDialogFragment : BaseDialogFragment() {
         titleCategory = root.findViewById(R.id.titleCategory)
         imgCloseDialog = root.findViewById(R.id.btnImageClose)
         btnRandomJoke = root.findViewById(R.id.btnJokeUpdate)
+        progress = root.findViewById(R.id.progress_joke)
+        imgNoInternet = root.findViewById(R.id.imgNoInternet_joke)
+        imgServerError = root.findViewById(R.id.imgServerError_joke)
         favorite = root.findViewById(R.id.favorite)
         favorite.setBackgroundResource(R.drawable.ic_favorite_border)
         icon = root.findViewById(R.id.avatar)
@@ -68,6 +72,7 @@ class JokeDialogFragment : BaseDialogFragment() {
             icon.visibility = getIcon
             favorite.visibility = getFavorite
             btnRandomJoke.visibility = getButton
+
         }
 
         setupMessagesErrorAndProgressBar()
@@ -85,14 +90,17 @@ class JokeDialogFragment : BaseDialogFragment() {
 
                 try {
                     v.setClickEnabled(false)
-                    favorite.visibility = View.GONE
+                    favorite.setClickEnabled(false)
                     taskRandomJokeByCategory(getTitleCategory.trim())
                 } finally {
-                    v.setClickEnabled(true)
-                    favorite.let {
-                        it.setClickEnabled(true)
-                        it.setBackgroundResource(R.drawable.ic_favorite_border)
-                    }
+                   Coroutines.main {
+                       delay(1_000) // 1 sec
+                       v.setClickEnabled(true)
+                       favorite.let {
+                           it.setClickEnabled(true)
+                           it.setBackgroundResource(R.drawable.ic_favorite_border)
+                       }
+                   }
 
                 }
             }
@@ -180,19 +188,21 @@ class JokeDialogFragment : BaseDialogFragment() {
         with(viewModel) {
 
             showProgressBar.observe(viewLifecycleOwner, Observer {
-                if (it == true) progress_joke.show()
-                else progress_joke.hide()
+                if (it == true) progress.show()
+                else progress.hide()
             })
 
             showMessageNoInternet.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Sem conexão com a internet :(\nTente novamente daqui a pouco...")
+                    if (it == true) imgNoInternet.visibility = View.VISIBLE
+                    else imgNoInternet.visibility = View.GONE
                 }
             })
 
             showMessageServerError.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Erro no servidor interno :( Tente novamente daqui a pouco...")
+                    if (it == true) imgServerError.visibility = View.VISIBLE
+                    else imgServerError.visibility = View.GONE
                 }
             })
 

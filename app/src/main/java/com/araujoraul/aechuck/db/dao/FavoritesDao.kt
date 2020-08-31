@@ -14,7 +14,7 @@ interface FavoritesDao {
     fun getAllFavoritesFromDatabase() : LiveData<List<FavoritesEntity>>
 
     @Query("DELETE FROM FavoritesEntity WHERE id = :idFavorite")
-    fun deleteFavoriteByIdFromDatabase(idFavorite: Int)
+    suspend fun deleteFavoriteByIdFromDatabase(idFavorite: Int)
 
     @Query("DELETE FROM FavoritesEntity")
     fun deleteAllFavoritesFromDatabase()

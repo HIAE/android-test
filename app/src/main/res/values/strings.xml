@@ -8,4 +8,5 @@
     <string name="favoritos_label">Favoritos</string>
     <string name="api_webview_txt">Conheça nossa API</string>
     <string name="joke_example">When Chuck Norris opened his mouth he made dodo birds extinct.</string>
+    <string name="txt_favorite_not_found">Você não tem nenhum favorito :(</string>
 </resources>

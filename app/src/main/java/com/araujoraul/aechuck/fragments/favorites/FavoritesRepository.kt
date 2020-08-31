@@ -7,5 +7,6 @@ class FavoritesRepository(
 ) {
 
     fun getAllFavorites() = favoritesDao.getAllFavoritesFromDatabase()
+    suspend fun removeFavorite(idFavorite: Int) = favoritesDao.deleteFavoriteByIdFromDatabase(idFavorite)
 
 }

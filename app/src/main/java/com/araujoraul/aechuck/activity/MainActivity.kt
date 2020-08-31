@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,15 +15,21 @@ import com.araujoraul.aechuck.R
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
+    private lateinit var viewModel: MainViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        footer.text = "By: araujoraul - ${viewModel.year.value} (Versão: ${viewModel.version.value})"
 
         setSupportActionBar(toolbar)
 

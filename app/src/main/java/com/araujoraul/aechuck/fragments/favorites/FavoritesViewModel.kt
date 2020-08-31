@@ -1,8 +1,11 @@
 package com.araujoraul.aechuck.fragments.favorites
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.araujoraul.aechuck.MainApplication
 import com.araujoraul.aechuck.db.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FavoritesViewModel : ViewModel() {
 
@@ -17,5 +20,6 @@ class FavoritesViewModel : ViewModel() {
     }
 
     fun getAllFavorites() = repository.getAllFavorites()
+    fun removeFavorite(idFavorite: Int) = viewModelScope.launch(Dispatchers.IO) { repository.removeFavorite(idFavorite) }
 
 }

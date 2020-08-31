@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,13 +25,21 @@ class CategoriesFragment : BaseFragment() {
 
     private val viewModel = CategoriesViewModel()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var imgNoInternet: ImageView
+    private lateinit var imgServerError: ImageView
     private var categoryList = MainApplication.categoryList
     private val piadaDialogFragment = JokeDialogFragment()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_categories, container, false)
 
-        recyclerView = root.findViewById(R.id.recyclerView_categorias)
+        recyclerView = root.findViewById(R.id.recyclerView_categories)
+        imgNoInternet = root.findViewById(R.id.imgNoInternet_categories)
+        imgServerError = root.findViewById(R.id.imgServerError_categories)
 
         recyclerView.let {
             it.layoutManager = LinearLayoutManager(requireActivity())
@@ -46,8 +54,9 @@ class CategoriesFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
+        lifecycleScope.launchWhenCreated {
             taskCategories()
-
+        }
     }
 
     private fun taskCategories() {
@@ -63,33 +72,41 @@ class CategoriesFragment : BaseFragment() {
 
                         categoryList.addAll(response)
 
-                        recyclerView.adapter = CategoriesAdapter(categoryList) { categoria: String ->
+                        recyclerView.adapter =
+                            CategoriesAdapter(categoryList) { categoria: String ->
 
-                            val args = Bundle()
-                            args.putString("category", categoria)
-                            piadaDialogFragment.arguments = args
-                            piadaDialogFragment.show(requireActivity().supportFragmentManager, "tag")
+                                val args = Bundle()
+                                args.putString("category", categoria)
+                                piadaDialogFragment.arguments = args
+                                piadaDialogFragment.show(
+                                    requireActivity().supportFragmentManager,
+                                    "tag"
+                                )
 
-                        }
+                            }
                     } else {
 
-                        recyclerView.adapter = CategoriesAdapter(categoryList) { categoria: String ->
+                        recyclerView.adapter =
+                            CategoriesAdapter(categoryList) { categoria: String ->
 
-                            val args = Bundle()
-                            args.putString("category", categoria)
-                            piadaDialogFragment.arguments = args
-                            piadaDialogFragment.show(requireActivity().supportFragmentManager, "tag")
+                                val args = Bundle()
+                                args.putString("category", categoria)
+                                piadaDialogFragment.arguments = args
+                                piadaDialogFragment.show(
+                                    requireActivity().supportFragmentManager,
+                                    "tag"
+                                )
 
-                        }
+                            }
 
                     }
             })
         }
     }
 
-    private fun setupMessagesErrorAndProgressBar(){
+    private fun setupMessagesErrorAndProgressBar() {
 
-        with(viewModel){
+        with(viewModel) {
 
             showProgressBar.observe(viewLifecycleOwner, Observer {
                 if (it == true) progress_categories.show()
@@ -98,13 +115,15 @@ class CategoriesFragment : BaseFragment() {
 
             showMessageNoInternet.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Sem conexão com a internet :(\nTente novamente daqui a pouco...")
+                    if (it == true) imgNoInternet.visibility = View.VISIBLE
+                    else imgNoInternet.visibility = View.GONE
                 }
             })
 
             showMessageServerError.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Erro no servidor interno :(\nTente novamente daqui a pouco...")
+                    if (it == true) imgServerError.visibility = View.VISIBLE
+                    else imgServerError.visibility = View.GONE
                 }
             })
 
