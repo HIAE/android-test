@@ -2,7 +2,7 @@ package com.araujoraul.aechuck.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ChuckJokes(
+data class ChuckJoke(
     @SerializedName("id") var id: String = "",
     @SerializedName("icon_url") var icon: String? = null,
     @SerializedName("url") var url: String? = null,

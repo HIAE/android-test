@@ -86,13 +86,13 @@ class CategoriasFragment : BaseFragment() {
 
             showMessageNoInternet.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Sem conexão com a internet!\nTente novamente daqui a pouco...")
+                    if (it == true) context?.toast("Sem conexão com a internet :(\nTente novamente daqui a pouco...")
                 }
             })
 
             showMessageServerError.observe(viewLifecycleOwner, Observer {
                 it.getContentIfNotHandled().let {
-                    if (it == true) context?.toast("Erro no servidor interno! Tente novamente daqui a pouco...")
+                    if (it == true) context?.toast("Erro no servidor interno :(\nTente novamente daqui a pouco...")
                 }
             })
 
