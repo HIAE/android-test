@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_webView"
         android:orderInCategory="100"
-        android:title="Conheça nossa API"
+        android:title="@string/api_webview_txt"
         app:showAsAction="never" />
 </menu>

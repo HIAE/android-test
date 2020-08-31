@@ -1,4 +1,4 @@
-package com.araujoraul.aechuck.fragments.categorias
+package com.araujoraul.aechuck.fragments.categories
 
 import androidx.lifecycle.MutableLiveData
 import com.araujoraul.aechuck.MainApplication
@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoriasRepository {
+class CategoriesRepository {
 
     private val app = MainApplication.getInstance()
     private val api = ApiService.createInstance(app.applicationContext)

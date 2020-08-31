@@ -1,30 +1,48 @@
-package com.araujoraul.aechuck.fragments.piada
+package com.araujoraul.aechuck.fragments.joke
 
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
-import android.widget.ImageView
 import androidx.lifecycle.MutableLiveData
 import com.araujoraul.aechuck.MainApplication
-import com.araujoraul.aechuck.R
+import com.araujoraul.aechuck.db.dao.FavoritesDao
+import com.araujoraul.aechuck.db.entities.FavoritesEntity
 import com.araujoraul.aechuck.domain.ApiService
 import com.araujoraul.aechuck.domain.model.ChuckJoke
 import com.araujoraul.aechuck.utils.Coroutines
 import com.araujoraul.aechuck.utils.Event
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PiadaRepository {
+class JokeRepository(
+    private var favoritesDao: FavoritesDao
+) {
 
     private val app = MainApplication.getInstance()
     private val api = ApiService.createInstance(app.applicationContext)
 
+    val favoritedError = MutableLiveData<Event<Boolean>>()
+    val favoriteHasSaved = MutableLiveData<Event<Boolean>>()
     val showRandomJoke = MutableLiveData<ChuckJoke>()
     val showProgressBar = MutableLiveData<Boolean>()
     val showMessageNoInternet = MutableLiveData<Event<Boolean>>()
     val showMessageServerError = MutableLiveData<Event<Boolean>>()
+
+    suspend fun saveJokeToFavorites(joke: String, category: String) {
+
+        if (joke.isNotEmpty() && category.isNotEmpty()){
+
+            val favorite = FavoritesEntity()
+            favorite.joke = joke
+            favorite.category = category
+
+            try {
+                favoritesDao.insertFavoriteIntoDatabase(favorite)
+                favoriteHasSaved.postValue(Event(true))
+            } catch (e: Exception){
+                favoritedError.postValue(Event(true))
+            }
+        }
+    }
 
     fun taskRandomJokeByCategory(category: String) {
         Coroutines.io { taskRandomJokeByCategoryBG(category) }

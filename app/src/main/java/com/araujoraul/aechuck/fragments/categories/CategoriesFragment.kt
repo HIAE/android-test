@@ -1,36 +1,34 @@
-package com.araujoraul.aechuck.fragments.categorias
+package com.araujoraul.aechuck.fragments.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.araujoraul.aechuck.MainApplication
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseFragment
-import com.araujoraul.aechuck.fragments.categorias.adapter.CategoriasAdapter
-import com.araujoraul.aechuck.fragments.piada.PiadaDialogFragment
+import com.araujoraul.aechuck.fragments.categories.adapter.CategoriesAdapter
+import com.araujoraul.aechuck.fragments.joke.JokeDialogFragment
 import com.araujoraul.aechuck.utils.hide
 import com.araujoraul.aechuck.utils.show
 import com.araujoraul.aechuck.utils.toast
-import kotlinx.android.synthetic.main.fragment_categorias.*
+import kotlinx.android.synthetic.main.fragment_categories.*
 
-class CategoriasFragment : BaseFragment() {
+class CategoriesFragment : BaseFragment() {
 
-    private lateinit var viewModel: CategoriasViewModel
+    private lateinit var viewModel: CategoriesViewModel
     private lateinit var recyclerView: RecyclerView
-    private val piadaDialogFragment = PiadaDialogFragment()
+    private val piadaDialogFragment = JokeDialogFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_categorias, container, false)
+        val root = inflater.inflate(R.layout.fragment_categories, container, false)
 
-        viewModel = ViewModelProvider(this).get(CategoriasViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CategoriesViewModel::class.java)
 
         recyclerView = root.findViewById(R.id.recyclerView_categorias)
 
@@ -65,7 +63,7 @@ class CategoriasFragment : BaseFragment() {
 
                         categories.addAll(response)
 
-                        recyclerView.adapter = CategoriasAdapter(categories) { categoria: String ->
+                        recyclerView.adapter = CategoriesAdapter(categories) { categoria: String ->
 
                             val args = Bundle()
                             args.putString("category", categoria)

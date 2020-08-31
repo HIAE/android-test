@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.categorias.CategoriasFragment">
+    tools:context=".fragments.categories.CategoriesFragment">
 
     <TextView
         android:id="@+id/descCategorias"
@@ -25,7 +25,7 @@
         android:layout_centerVertical="true"
         android:layout_below="@+id/descCategorias"
         android:scrollbars="vertical"
-        tools:listitem="@layout/categorias_list" />
+        tools:listitem="@layout/categories_list" />
 
     <ProgressBar
         android:id="@+id/progress_categories"

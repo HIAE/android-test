@@ -9,5 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="@string/categorias_label" />
 
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/favoritos_label" />
+
     </group>
 </menu>

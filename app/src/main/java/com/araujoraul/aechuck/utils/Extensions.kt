@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.children
+import com.google.android.material.snackbar.Snackbar
 
 fun ProgressBar.show(){
     visibility = View.VISIBLE
@@ -28,6 +29,14 @@ fun View.setClickEnabled(enabled: Boolean) {
 
 fun Context.toast(message: String){
    Toast.makeText(this, message, Toast.LENGTH_LONG ).show()
+}
+
+fun View.snackbar(message: String) {
+    Snackbar.make(this, message, Snackbar.LENGTH_LONG).also { snackbar ->
+        snackbar.setAction("Ok") {
+            snackbar.dismiss()
+        }
+    }.show()
 }
 
 fun AppCompatActivity.setupToolbar(@IdRes id: Int, title: String? = null, upNavigation: Boolean = false): ActionBar {

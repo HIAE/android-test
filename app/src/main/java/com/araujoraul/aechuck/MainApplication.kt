@@ -2,6 +2,7 @@ package com.araujoraul.aechuck
 
 import android.app.Application
 import android.util.Log
+import com.araujoraul.aechuck.db.entities.FavoritesEntity
 
 class MainApplication : Application() {
 
@@ -14,6 +15,8 @@ class MainApplication : Application() {
     }
 
     companion object {
+
+        var favoriteList = ArrayList<FavoritesEntity>()
 
         private var appInstance: MainApplication? = null
 

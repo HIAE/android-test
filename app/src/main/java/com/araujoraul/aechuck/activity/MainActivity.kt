@@ -26,7 +26,7 @@ class MainActivity : BaseActivity() {
 
         setSupportActionBar(toolbar)
 
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_home), drawer_layout)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_home, R.id.nav_favorite), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
     }

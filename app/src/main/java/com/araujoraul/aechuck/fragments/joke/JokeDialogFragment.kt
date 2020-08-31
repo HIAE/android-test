@@ -1,4 +1,4 @@
-package com.araujoraul.aechuck.fragments.piada
+package com.araujoraul.aechuck.fragments.joke
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,16 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseDialogFragment
-import com.araujoraul.aechuck.utils.hide
-import com.araujoraul.aechuck.utils.setClickEnabled
-import com.araujoraul.aechuck.utils.show
-import com.araujoraul.aechuck.utils.toast
+import com.araujoraul.aechuck.utils.*
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_dialog_piada.*
+import kotlinx.android.synthetic.main.fragment_dialog_joke.*
 
-class PiadaDialogFragment : BaseDialogFragment(){
+class JokeDialogFragment : BaseDialogFragment() {
 
-    private lateinit var viewModel: PiadaViewModel
+    private lateinit var viewModel: JokeViewModel
     private lateinit var imgCloseDialog: ImageButton
     private lateinit var titleCategory: TextView
     private lateinit var icon: ImageView
@@ -34,21 +31,26 @@ class PiadaDialogFragment : BaseDialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (arguments != null){
+        if (arguments != null) {
             val args = arguments
             getTitleCategory = args?.getString("category").toString().trim()
         }
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_dialog_piada, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root = inflater.inflate(R.layout.fragment_dialog_joke, container, false)
 
-        viewModel = ViewModelProvider(this).get(PiadaViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(JokeViewModel::class.java)
         titleCategory = root.findViewById(R.id.titleCategory)
         imgCloseDialog = root.findViewById(R.id.btnImageClose)
         btnRandomJoke = root.findViewById(R.id.btnJokeUpdate)
         favorite = root.findViewById(R.id.favorite)
+        favorite.setBackgroundResource(R.drawable.ic_favorite_border)
         icon = root.findViewById(R.id.avatar)
         joke = root.findViewById(R.id.joke)
 
@@ -56,7 +58,7 @@ class PiadaDialogFragment : BaseDialogFragment(){
         titleCategory.text = "Categoria: ${getTitleCategory}"
 
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             val getJoke = savedInstanceState.getString("joke")
             val getFavorite = savedInstanceState.getInt("favorite")
             val getIcon = savedInstanceState.getInt("icon")
@@ -76,18 +78,52 @@ class PiadaDialogFragment : BaseDialogFragment(){
         super.onResume()
 
         lifecycleScope.launchWhenCreated {
-           if (joke.text.toString().isEmpty())
-               taskRandomJokeByCategory(getTitleCategory.trim())
+            if (joke.text.toString().isEmpty())
+                taskRandomJokeByCategory(getTitleCategory.trim())
 
             btnRandomJoke.setOnClickListener { v ->
 
                 try {
                     v.setClickEnabled(false)
+                    favorite.visibility = View.GONE
                     taskRandomJokeByCategory(getTitleCategory.trim())
                 } finally {
                     v.setClickEnabled(true)
-                }
+                    favorite.let {
+                        it.setClickEnabled(true)
+                        it.setBackgroundResource(R.drawable.ic_favorite_border)
+                    }
 
+
+
+                }
+            }
+
+            favorite.setOnClickListener { v ->
+
+                try {
+                    v.setClickEnabled(false)
+                    favorite.setBackgroundResource(R.drawable.ic_favorited)
+                    saveJokeToFavorites(joke.text.toString(), getTitleCategory)
+                } finally {
+
+                    with(viewModel) {
+                        favoriteHasSaved.observe(viewLifecycleOwner, Observer {
+                            it.getContentIfNotHandled().let {
+                                if (it == true) v.snackbar("Adicionado aos favoritos com sucesso :)")
+                            }
+                        })
+
+                        favoritedError.observe(viewLifecycleOwner, Observer {
+                            it.getContentIfNotHandled().let {
+                                if (it == true) {
+                                    v.snackbar("Ocorreu um erro :(\n Por favor, tente novamente...")
+                                    v.setClickEnabled(true)
+                                }
+                            }
+                        })
+                    }
+                }
             }
         }
     }
@@ -100,9 +136,12 @@ class PiadaDialogFragment : BaseDialogFragment(){
         outState.putInt("icon", 0)
     }
 
+    private fun saveJokeToFavorites(joke: String, category: String) =
+        viewModel.saveJokeToFavorites(joke, category)
+
     private fun taskRandomJokeByCategory(category: String) {
 
-        with(viewModel){
+        with(viewModel) {
 
             taskRandomJokeByCategory(category)
 
@@ -110,10 +149,12 @@ class PiadaDialogFragment : BaseDialogFragment(){
 
                 if (response != null) {
 
-                    if (joke.text.toString().isNullOrBlank() || !joke.text.toString().trim().equals(response.value.trim())){
+                    if (joke.text.toString().isNullOrBlank() || !joke.text.toString().trim()
+                            .equals(response.value.trim())
+                    ) {
 
                         try {
-                                joke.text = response.value
+                            joke.text = response.value
 
                             Picasso.with(context).load(response.icon).fit()
                                 .centerCrop()
@@ -123,8 +164,8 @@ class PiadaDialogFragment : BaseDialogFragment(){
 
                         } finally {
                             icon.visibility = View.VISIBLE
-                            favorite.visibility = View.VISIBLE
                             btnRandomJoke.visibility = View.VISIBLE
+                            favorite.visibility = View.VISIBLE
                         }
 
                     }
@@ -136,9 +177,9 @@ class PiadaDialogFragment : BaseDialogFragment(){
 
     }
 
-    private fun setupMessagesErrorAndProgressBar(){
+    private fun setupMessagesErrorAndProgressBar() {
 
-        with(viewModel){
+        with(viewModel) {
 
             showProgressBar.observe(viewLifecycleOwner, Observer {
                 if (it == true) progress_joke.show()
