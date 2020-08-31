@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +45,9 @@ class CategoriasFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        taskCategories()
+        lifecycleScope.launchWhenCreated {
+            taskCategories()
+        }
     }
 
     private fun taskCategories() {

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseDialogFragment
 import com.araujoraul.aechuck.utils.hide
@@ -54,6 +55,19 @@ class PiadaDialogFragment : BaseDialogFragment(){
         imgCloseDialog.setOnClickListener { dismiss() }
         titleCategory.text = "Categoria: ${getTitleCategory}"
 
+
+        if (savedInstanceState != null){
+            val getJoke = savedInstanceState.getString("joke")
+            val getFavorite = savedInstanceState.getInt("favorite")
+            val getIcon = savedInstanceState.getInt("icon")
+            val getButton = savedInstanceState.getInt("button")
+
+            joke.text = getJoke.toString()
+            icon.visibility = getIcon
+            favorite.visibility = getFavorite
+            btnRandomJoke.visibility = getButton
+        }
+
         setupMessagesErrorAndProgressBar()
         return root
     }
@@ -61,18 +75,29 @@ class PiadaDialogFragment : BaseDialogFragment(){
     override fun onResume() {
         super.onResume()
 
-        taskRandomJokeByCategory(getTitleCategory.trim())
+        lifecycleScope.launchWhenCreated {
+           if (joke.text.toString().isEmpty())
+               taskRandomJokeByCategory(getTitleCategory.trim())
 
-        btnRandomJoke.setOnClickListener { v ->
+            btnRandomJoke.setOnClickListener { v ->
 
-            try {
-                v.setClickEnabled(false)
-                taskRandomJokeByCategory(getTitleCategory.trim())
-            } finally {
-                v.setClickEnabled(true)
+                try {
+                    v.setClickEnabled(false)
+                    taskRandomJokeByCategory(getTitleCategory.trim())
+                } finally {
+                    v.setClickEnabled(true)
+                }
+
             }
-
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("joke", joke.text.toString().trim())
+        outState.putInt("favorite", 0)
+        outState.putInt("button", 0)
+        outState.putInt("icon", 0)
     }
 
     private fun taskRandomJokeByCategory(category: String) {
@@ -88,7 +113,7 @@ class PiadaDialogFragment : BaseDialogFragment(){
                     if (joke.text.toString().isNullOrBlank() || !joke.text.toString().trim().equals(response.value.trim())){
 
                         try {
-                            joke.text = response.value
+                                joke.text = response.value
 
                             Picasso.with(context).load(response.icon).fit()
                                 .centerCrop()

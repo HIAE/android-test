@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ApiActivity"
+            android:parentActivityName=".activity.MainActivity" />
 
     </application>
 

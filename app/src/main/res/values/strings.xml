@@ -4,4 +4,5 @@
     <string name="categorias_label">Categorias</string>
     <string name="desc_categorias">Escolha uma categoria :)</string>
     <string name="btn_manda_outra">Manda outra!</string>
+    <string name="title_api">Chuck Norris Jokes Api</string>
 </resources>

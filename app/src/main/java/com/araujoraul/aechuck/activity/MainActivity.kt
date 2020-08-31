@@ -1,7 +1,9 @@
 package com.araujoraul.aechuck.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -27,6 +29,15 @@ class MainActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_home), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_webView -> {
+                startActivity(Intent(context, ApiActivity::class.java))
+                true
+            } else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
