@@ -17,6 +17,7 @@ class MainApplication : Application() {
     companion object {
 
         var favoriteList = ArrayList<FavoritesEntity>()
+        var categoryList = ArrayList<String>()
 
         private var appInstance: MainApplication? = null
 

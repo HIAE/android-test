@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.araujoraul.aechuck.MainApplication
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseFragment
 import com.araujoraul.aechuck.fragments.categories.adapter.CategoriesAdapter
@@ -23,13 +24,13 @@ class CategoriesFragment : BaseFragment() {
 
     private lateinit var viewModel: CategoriesViewModel
     private lateinit var recyclerView: RecyclerView
+    private var categoryList = MainApplication.categoryList
     private val piadaDialogFragment = JokeDialogFragment()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_categories, container, false)
 
         viewModel = ViewModelProvider(this).get(CategoriesViewModel::class.java)
-
         recyclerView = root.findViewById(R.id.recyclerView_categorias)
 
         recyclerView.let {
@@ -37,6 +38,12 @@ class CategoriesFragment : BaseFragment() {
             it.itemAnimator = DefaultItemAnimator()
             it.setHasFixedSize(true)
         }
+
+        if (savedInstanceState != null){
+            val getList = savedInstanceState.getStringArrayList("list")
+            if (getList != null) categoryList.addAll(getList)
+        }
+
         setupMessagesErrorAndProgressBar()
         return root
     }
@@ -48,9 +55,12 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    private fun taskCategories() {
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putStringArrayList("list", categoryList)
+    }
 
-        val categories = mutableListOf<String>()
+    private fun taskCategories() {
 
         with(viewModel) {
 
@@ -59,11 +69,11 @@ class CategoriesFragment : BaseFragment() {
             showCategories.observe(viewLifecycleOwner, Observer { response ->
 
                 if (response.isNotEmpty())
-                    if (categories.isEmpty()) {
+                    if (categoryList.isEmpty()) {
 
-                        categories.addAll(response)
+                        categoryList.addAll(response)
 
-                        recyclerView.adapter = CategoriesAdapter(categories) { categoria: String ->
+                        recyclerView.adapter = CategoriesAdapter(categoryList) { categoria: String ->
 
                             val args = Bundle()
                             args.putString("category", categoria)
@@ -71,6 +81,17 @@ class CategoriesFragment : BaseFragment() {
                             piadaDialogFragment.show(requireActivity().supportFragmentManager, "tag")
 
                         }
+                    } else {
+
+                        recyclerView.adapter = CategoriesAdapter(categoryList) { categoria: String ->
+
+                            val args = Bundle()
+                            args.putString("category", categoria)
+                            piadaDialogFragment.arguments = args
+                            piadaDialogFragment.show(requireActivity().supportFragmentManager, "tag")
+
+                        }
+
                     }
             })
         }
