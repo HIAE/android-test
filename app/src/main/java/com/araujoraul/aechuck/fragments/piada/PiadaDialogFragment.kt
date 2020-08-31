@@ -1,10 +1,10 @@
 package com.araujoraul.aechuck.fragments.piada
 
-import android.icu.number.NumberFormatter.with
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,10 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseDialogFragment
 import com.araujoraul.aechuck.utils.hide
+import com.araujoraul.aechuck.utils.setClickEnabled
 import com.araujoraul.aechuck.utils.show
 import com.araujoraul.aechuck.utils.toast
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_categorias.*
 import kotlinx.android.synthetic.main.fragment_dialog_piada.*
 
 class PiadaDialogFragment : BaseDialogFragment(){
@@ -26,6 +26,8 @@ class PiadaDialogFragment : BaseDialogFragment(){
     private lateinit var titleCategory: TextView
     private lateinit var icon: ImageView
     private lateinit var joke: TextView
+    private lateinit var btnRandomJoke: Button
+    private lateinit var favorite: ImageButton
     private var getTitleCategory = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,8 @@ class PiadaDialogFragment : BaseDialogFragment(){
         viewModel = ViewModelProvider(this).get(PiadaViewModel::class.java)
         titleCategory = root.findViewById(R.id.titleCategory)
         imgCloseDialog = root.findViewById(R.id.btnImageClose)
+        btnRandomJoke = root.findViewById(R.id.btnJokeUpdate)
+        favorite = root.findViewById(R.id.favorite)
         icon = root.findViewById(R.id.avatar)
         joke = root.findViewById(R.id.joke)
 
@@ -56,7 +60,19 @@ class PiadaDialogFragment : BaseDialogFragment(){
 
     override fun onResume() {
         super.onResume()
+
         taskRandomJokeByCategory(getTitleCategory.trim())
+
+        btnRandomJoke.setOnClickListener { v ->
+
+            try {
+                v.setClickEnabled(false)
+                taskRandomJokeByCategory(getTitleCategory.trim())
+            } finally {
+                v.setClickEnabled(true)
+            }
+
+        }
     }
 
     private fun taskRandomJokeByCategory(category: String) {
@@ -69,22 +85,28 @@ class PiadaDialogFragment : BaseDialogFragment(){
 
                 if (response != null) {
 
-                    if (joke.text.toString().isNullOrBlank()){
+                    if (joke.text.toString().isNullOrBlank() || !joke.text.toString().trim().equals(response.value.trim())){
 
-                        joke.text = response.value
+                        try {
+                            joke.text = response.value
 
-                        Picasso.with(context).load(response.icon).fit()
-                            .centerCrop()
-                            .placeholder(R.drawable.placeholder)
-                            .error(R.drawable.chuck_norris)
-                            .into(icon)
+                            Picasso.with(context).load(response.icon).fit()
+                                .centerCrop()
+                                .placeholder(R.drawable.placeholder)
+                                .error(R.drawable.chuck_norris)
+                                .into(icon)
+
+                        } finally {
+                            icon.visibility = View.VISIBLE
+                            favorite.visibility = View.VISIBLE
+                            btnRandomJoke.visibility = View.VISIBLE
+                        }
 
                     }
 
                 }
 
             })
-
         }
 
     }

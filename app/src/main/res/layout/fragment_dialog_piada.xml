@@ -53,6 +53,7 @@
         android:src="@drawable/placeholder"
         android:maxWidth="100dp"
         android:maxHeight="100dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,14 +74,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="When Chuck Norris opened his mouth he made dodo birds extinct." />
 
-    <ImageView
-        android:id="@+id/imageFavorite"
+    <ImageButton
+        android:id="@+id/favorite"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
         android:padding="8dp"
+        android:visibility="gone"
         android:src="@drawable/ic_favorite_border"
         android:foreground="?android:selectableItemBackground"
+        android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/joke"
         app:layout_constraintStart_toEndOf="@+id/joke"
         app:layout_constraintEnd_toStartOf="@+id/joke" />
@@ -105,8 +108,9 @@
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:padding="16dp"
+        android:visibility="gone"
         app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toBottomOf="@+id/imageFavorite"
+        app:layout_constraintTop_toBottomOf="@+id/favorite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
