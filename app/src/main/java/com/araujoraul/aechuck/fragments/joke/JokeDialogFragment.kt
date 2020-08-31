@@ -77,7 +77,7 @@ class JokeDialogFragment : BaseDialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             if (joke.text.toString().isEmpty())
                 taskRandomJokeByCategory(getTitleCategory.trim())
 
@@ -93,8 +93,6 @@ class JokeDialogFragment : BaseDialogFragment() {
                         it.setClickEnabled(true)
                         it.setBackgroundResource(R.drawable.ic_favorite_border)
                     }
-
-
 
                 }
             }

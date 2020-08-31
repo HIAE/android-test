@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoriesFragment : BaseFragment() {
 
-    private lateinit var viewModel: CategoriesViewModel
+    private val viewModel = CategoriesViewModel()
     private lateinit var recyclerView: RecyclerView
     private var categoryList = MainApplication.categoryList
     private val piadaDialogFragment = JokeDialogFragment()
@@ -30,7 +31,6 @@ class CategoriesFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_categories, container, false)
 
-        viewModel = ViewModelProvider(this).get(CategoriesViewModel::class.java)
         recyclerView = root.findViewById(R.id.recyclerView_categorias)
 
         recyclerView.let {
@@ -39,25 +39,15 @@ class CategoriesFragment : BaseFragment() {
             it.setHasFixedSize(true)
         }
 
-        if (savedInstanceState != null){
-            val getList = savedInstanceState.getStringArrayList("list")
-            if (getList != null) categoryList.addAll(getList)
-        }
-
         setupMessagesErrorAndProgressBar()
         return root
     }
 
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launchWhenCreated {
-            taskCategories()
-        }
-    }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putStringArrayList("list", categoryList)
+            taskCategories()
+
     }
 
     private fun taskCategories() {
