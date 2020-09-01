@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.araujoraul.aechuck.MainApplication
 import com.araujoraul.aechuck.R
 import com.araujoraul.aechuck.fragments.BaseDialogFragment
 import com.araujoraul.aechuck.utils.*
@@ -28,6 +29,7 @@ class JokeDialogFragment : BaseDialogFragment() {
     private lateinit var imgNoInternet: ImageView
     private lateinit var imgServerError: ImageView
     private var getTitleCategory = ""
+    private var savedIcon = MainApplication.savedIcon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,11 +69,19 @@ class JokeDialogFragment : BaseDialogFragment() {
             val getFavorite = savedInstanceState.getInt("favorite")
             val getIcon = savedInstanceState.getInt("icon")
             val getButton = savedInstanceState.getInt("button")
+            val getSavedIcon = savedInstanceState.getString("savedIcon")
 
             joke.text = getJoke.toString()
             icon.visibility = getIcon
             favorite.visibility = getFavorite
             btnRandomJoke.visibility = getButton
+            savedIcon = getSavedIcon
+
+            Picasso.with(context).load(savedIcon).fit()
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.chuck_norris)
+                .into(icon)
 
         }
 
@@ -140,6 +150,7 @@ class JokeDialogFragment : BaseDialogFragment() {
         outState.putInt("favorite", 0)
         outState.putInt("button", 0)
         outState.putInt("icon", 0)
+        outState.putString("savedIcon", savedIcon)
     }
 
     private fun saveJokeToFavorites(joke: String, category: String) =
@@ -167,6 +178,8 @@ class JokeDialogFragment : BaseDialogFragment() {
                                 .placeholder(R.drawable.placeholder)
                                 .error(R.drawable.chuck_norris)
                                 .into(icon)
+
+                            savedIcon = response.icon
 
                         } finally {
                             icon.visibility = View.VISIBLE

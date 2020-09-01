@@ -84,7 +84,10 @@ class JokeRepository(
                 showProgressBar.postValue(false)
                 showMessageNoInternet.postValue(Event(true))
                 showMessageServerError.postValue(Event(false))
-                taskRandomJokeByCategory(category)
+                Coroutines.io {
+                    delay(5_000) //5 sec
+                    taskRandomJokeByCategory(category)
+                }
             }
         })
     }

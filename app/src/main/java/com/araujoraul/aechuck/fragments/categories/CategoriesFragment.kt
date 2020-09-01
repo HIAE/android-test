@@ -47,6 +47,13 @@ class CategoriesFragment : BaseFragment() {
             it.setHasFixedSize(true)
         }
 
+        if (savedInstanceState != null){
+            val getCategoryList = savedInstanceState.getStringArrayList("list")
+
+            if (getCategoryList != null && categoryList.isEmpty()) categoryList.addAll(getCategoryList)
+
+        }
+
         setupMessagesErrorAndProgressBar()
         return root
     }
@@ -54,8 +61,22 @@ class CategoriesFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launchWhenCreated {
-            taskCategories()
+        lifecycleScope.launchWhenResumed {
+
+            if (categoryList.isEmpty()) taskCategories()
+                else {
+                recyclerView.adapter =
+                    CategoriesAdapter(categoryList) { categoria: String ->
+
+                        val args = Bundle()
+                        args.putString("category", categoria)
+                        piadaDialogFragment.arguments = args
+                        piadaDialogFragment.show(
+                            requireActivity().supportFragmentManager,
+                            "tag"
+                        )
+                    }
+            }
         }
     }
 
@@ -82,23 +103,7 @@ class CategoriesFragment : BaseFragment() {
                                     requireActivity().supportFragmentManager,
                                     "tag"
                                 )
-
                             }
-                    } else {
-
-                        recyclerView.adapter =
-                            CategoriesAdapter(categoryList) { categoria: String ->
-
-                                val args = Bundle()
-                                args.putString("category", categoria)
-                                piadaDialogFragment.arguments = args
-                                piadaDialogFragment.show(
-                                    requireActivity().supportFragmentManager,
-                                    "tag"
-                                )
-
-                            }
-
                     }
             })
         }
@@ -129,6 +134,12 @@ class CategoriesFragment : BaseFragment() {
 
         }
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putStringArrayList("list", categoryList)
     }
 
 }

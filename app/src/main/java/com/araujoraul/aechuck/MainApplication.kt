@@ -18,6 +18,7 @@ class MainApplication : Application() {
 
         var favoriteList = ArrayList<FavoritesEntity>()
         var categoryList = ArrayList<String>()
+        var savedIcon: String? = null
 
         private var appInstance: MainApplication? = null
 

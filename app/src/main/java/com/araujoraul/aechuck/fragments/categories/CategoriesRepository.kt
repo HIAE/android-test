@@ -62,7 +62,10 @@ class CategoriesRepository {
                 showProgressBar.postValue(false)
                 showMessageNoInternet.postValue(Event(true))
                 showMessageServerError.postValue(Event(false))
-                taskCategories()
+                Coroutines.io {
+                    delay(5_000) //5 sec
+                    taskCategories()
+                }
             }
 
         })
