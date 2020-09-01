@@ -1,69 +1,13 @@
-### Seja muuuuuito bem vindx ao teste de Android do Albert Einstein!
+Olá equipe Albert Einstein!!
 
-Primeiro, **VALEU** por separar seu tempo para fazer este pequeno teste.<br/>
-Segundo, Leia **A-TEN-TA-MEN-TE** tudo aqui para não perder nada e nos enviar um projetinho **PORRETA**!
-
-SHOW!? 
-
-`<FunkDoInstagramDoMomento>`
+É um prezer imenso estar participando desta oportunidade.
 
 
- *Cumprimentos: OK* <br/>
- *Agradecimentos: OK* <br/>
- *Avisos: OK* <br/>
+## Só uma observação:
+Tentei implementar uma injeção de dependência automatizada com a nova biblioteca "Hilt", porém surgiram alguns bugs e eu precisaria de mais tempo para poder estudar com calma e entender tudo.
+Logo, resolvi deixar uma injeção de dependência manual mesmo.
+Mas... Espero que gostem do app <3
 
-*COLA NO EINSTÃO PRO DESESPERO DO...*
+Aguardo um feedback...
 
-`</FunkDoInstagramDoMomento>`
-
-.
-.
-.
-.
-
-
-Nós queremos que você mostre todas as suas habilidades construindo um app Android usando Kotlin (Java no Android não dá mais né migxs?) que consuma a API do [ChuckNorrisAPI](https://api.chucknorris.io/ "ChuckNorrisAPI")
-
-Você não tem que ser o mestre dos designers, MAS queremos devs que também saibam opinar e conversar com os nossos mestres designers. Então, faça seu melhor quando for escrever os layouts ;)
-
-#### O APP DEVE CONTER:
-
-- Uma tela de lista de categorias
-- Uma tela que vai mostrar uma piada aleatória da categoria clicada na tela anterior (basicão: lista->detalhe ;))
-
-####  Tecnicamente, o que queremos que você use:
-
-- Kotlin (já falamos sobre isso, bebê)
-- Injeção de dependência com Hilt
-- Courotines ou RXJava2 (E vamos ficar super empolgados e curiosos em entender o motivo da sua escolha aqui)
-- AndroidX
-- VIPER ou MVVM
-
-#### Como você será avaliado:
-
-- Organização do código
-- Testes unitários
-- Uso de SOLID
-- Siga a guideline do Material
-- Gostaríamos de entender como você trabalha, então, queremos olhar sua evolução pelos seus commits ;)
-
-
-#### Se tiver muito fácil e você quiser fazer um pouco mais:
-
-- Na tela de detalhes da piada, crie um jeito de ver as próximas piadas da mesma categoria, sem sair da tela (ex: swipe, botão de ir e voltar e etc)
-- Crie um jeito de favoritar as piadas e uma tela para ver as favoritas na sessão
-- Offline first! Faça a persistência dos dados.
-- Uma tela de abertura com uma imagem do Chuck
-
-<br/>
-
-**IMPORTANTE: Faça um fork e assim que começar abra um PR com o nome "WIP - $projectName" para acompanharmos.**<br/>
-**IMPORTANTE2: Qualquer dúvida, sugestão ou problema, abra uma issue que a gente responde.**
-
-*O teste é esse. Viu? Nem doeu.*
-
-*Dê o seu melhor*
-
-*Boa sorte!*
-
-*Tchau!*
+Até mais! :)
