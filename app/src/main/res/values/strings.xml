@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AEchuck</string>
+    <string name="nav_header_title">Chuck Norris Jokes</string>
+    <string name="categorias_label">Categorias</string>
+    <string name="desc_categorias">Escolha uma categoria :)</string>
+    <string name="btn_manda_outra">Manda outra!</string>
+    <string name="title_api">Chuck Norris Jokes Api</string>
+    <string name="favoritos_label">Favoritos</string>
+    <string name="api_webview_txt">Conheça nossa API</string>
+    <string name="joke_example">When Chuck Norris opened his mouth he made dodo birds extinct.</string>
+    <string name="txt_favorite_not_found">Você não tem nenhum favorito :(</string>
+</resources>
